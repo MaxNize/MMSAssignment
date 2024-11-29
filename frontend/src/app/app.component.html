@@ -1,0 +1,8 @@
+<h1>Angular + Flask Integration</h1>
+<input
+    [value]="name"
+    (input)="updateName($event)"
+    placeholder="Enter your name"
+/>
+<button (click)="sendGreeting()">Greet</button>
+<p>{{ greeting }}</p>
