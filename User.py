@@ -13,4 +13,4 @@ class User:
         self.trash = "Trash"
 
     def login(self, userName, pw):
-        return userName == self.userName and pw == self.pw    
+        return userName == self.userName and pw == self._pw    

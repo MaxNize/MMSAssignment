@@ -1,9 +1,24 @@
 ToDo:
+-MMS.askForActionsLogin
+-MMS.createUser: validate mail
+-MMS.createUser: validate pw
+-MMS.createUser: check if user exists
 -DB-Anbindung
--
+
+BUGS:
 
 
 ToDo Max:
+-ToDo
+--MMS.mainloop.openFolder
+-inProgress
+--MMS.mainloop.writeMail
+-Testing
+
+-Done
+--MMS.createUser
+--MMS.logIntoUser
+--MMS.askForActionsLogin.logout
 
 
 
