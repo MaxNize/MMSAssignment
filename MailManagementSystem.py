@@ -42,9 +42,10 @@ class MailManagementSystem:
                 pw = input(self.TEXTenterYourPw)
                 for i in self.users:
                     if (i.userName == userName):
-                        self.users.remove(i)
-                        print("Successfully deleted User ", userName)
-                        break
+                        if (i.checkPw(pw)):
+                            self.users.remove(i)
+                            print("Successfully deleted User ", userName)
+                            break
             else:
                 print("CANCELED")
         else:

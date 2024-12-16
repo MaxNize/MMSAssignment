@@ -30,3 +30,6 @@ class User:
     def getMailsOfKategory(self, kategoryName):
         for i in self.kategories:
             return i.mails
+        
+    def checkPw(self, pw):
+        return pw == self._pw
