@@ -1,8 +1,6 @@
 Backlog:
 -MMS.askForActionsLogin
--MMS.createUser: validate mail -> RegEx
--MMS.createUser: validate pw
--MMS.createUser: check if user exists
+
 -Mail: TimeStamp
 -I want to go back from every action at
     any time
@@ -32,3 +30,6 @@ ToDo Max:
 
 
 ToDo Dimi:
+-MMS.createUser: validate mail -> RegEx
+-MMS.createUser: validate pw
+-MMS.createUser: check if user exists
