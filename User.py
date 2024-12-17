@@ -10,10 +10,7 @@ class User:
         self.kategories = [Kategory.Kategory("Inbox"), Kategory.Kategory("Sent"), Kategory.Kategory("Trash")]
         self.inbox = "Recieved"
         self.outbox = "Sent"
-        self.trash = "Trash"
-
-    def login(self, userName, pw):
-        return userName == self.userName and pw == self._pw  
+        self.trash = "Trash" 
 
     def sendMail(self, topic, to, sender, bcc, cc, content, attachmentsPath):
         print("DEBUG: User.sendMail")

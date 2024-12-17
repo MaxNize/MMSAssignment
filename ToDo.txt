@@ -7,7 +7,15 @@ Backlog:
 -DB-Anbindung
 
 BUGS:
-
+-open empty folder gets you stuck
+-i want feedback on empty folders
+-opening not existing mail still opens mail
+-stuck in mail options
+-little more spacing between prompts could be nice
+-entering not a number crashes
+-DEBUG: User.sendMail
+-Deleting mail should first put into trash
+-if answered mail: Layout is fucked
 
 ToDo Max:
 -ToDo
