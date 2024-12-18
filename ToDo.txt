@@ -16,9 +16,10 @@ ToDo Max:
 -ToDo
 
 -inProgress
+
+-Testing
 --MMS.mainloop.openFolder
 ---forward
--Testing
 ---delete mail
 ---move to folder
 ---answer

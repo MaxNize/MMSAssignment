@@ -208,10 +208,11 @@ class MailManagementSystem:
                 safety = input("Do you want to send the message? (y/n) ")
 
                 if(self.checkSafetyQuestion(safety)):
-                    topic = "AW: " + folder.mails[mailIndex].topic
+                    topic = "FW: " + folder.mails[mailIndex].topic
                     content = content + "\n Original Message: " + folder.mails[mailIndex].content
                     attachmentsPath = folder.mails[mailIndex].attachmentsPath + attachmentsPath
                     self.active.sendMail(topic, folder.mails[mailIndex].sender, self.active.mail, folder.mails[mailIndex].bcc, folder.mails[mailIndex].cc, content, attachmentsPath)
+                    
     def askForActionsNoLogin(self):
         self.TEXTheading("MENU")
 
