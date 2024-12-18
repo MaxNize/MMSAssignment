@@ -59,10 +59,16 @@ class MailManagementSystem:
         if (input == "y" or input == "Y" or input == "yes" or input == "Yes"):
             return True
         return False
+    
+    def createUser(self, userName, firstName, lastName, mail, pw):
+        self.users.append(User.User(userName, firstName, lastName, mail, pw))
+
+    def deleteUser(self, userName):
+        self.users.remove(self.getUser(userName))
 
     ########################################################################
     #These are the main functions that are called by the user. They should be small and clean. Call a helper function :)
-    def createUser(self):
+    def createUserQ(self):
         self.TEXTheading("CREATE USER")
 
         userName = input(self.TEXTenterUserName)
@@ -70,9 +76,9 @@ class MailManagementSystem:
         lastName = input("Please enter a Lastname: ")
         mail = input("Please enter a Mail: ")
         pw = input("Please enter a Password: ")
-        self.users.append(User.User(userName, firstName, lastName, mail, pw))
+        self.createUser(userName, firstName, lastName, mail, pw)
 
-    def deleteUser(self):
+    def deleteUserQ(self):
         self.TEXTheading("DELETING USER")
 
         userName = input(self.TEXTenterUserName)
@@ -84,7 +90,7 @@ class MailManagementSystem:
                 pw = input(self.TEXTenterYourPw)
                 user = self.getUser(userName)
                 if (user.checkPw(pw)):
-                    self.users.remove(user)
+                    self.deleteUser(userName)
                     print("Successfully deleted User ", userName)
                     return
                 print("Wrong Password!")
@@ -136,13 +142,20 @@ class MailManagementSystem:
         self.TEXTheading(folderName+"- Folder")
         folder = self.getFolderOfActive(folderName)
 
-        j = 0
+        print("0 : CANCEL")
+
+        j = 1
         for i in folder.mails:
             print(j, ": ", i.topic)
             j+=1
 
+        if (j == 1):
+            print("No Mails in this Folder")
+
         mailIndex = int(input("Which mail do you want to open?: "))
-        print(folder.mails[mailIndex])
+        if (mailIndex == 0):
+            return
+        print(folder.mails[mailIndex-1])
 
         self.askForMailOptions(folder, mailIndex)
                 
@@ -150,36 +163,57 @@ class MailManagementSystem:
     #Here is the Menuing done :). keep everything here
     def askForMailOptions(self, folder, mailIndex):
             print("Available Actions: ")
-            print("0: delete Mail from folder")
-            print("1: move to different folder")
-            print("2: answer")
-            print("3: forward")
+            print("0: CANCEL")
+            print("1: delete Mail from folder")
+            print("2: move to different folder")
+            print("3: answer")
+            print("4: forward")
             answer = int(input("A: "))
+
+            if (answer == 0):
+                return
+            print(mailIndex)
+            mailIndex-=1
+            print(mailIndex)
 
             self.reactForAnswersMailOptions(answer, folder, mailIndex)
 
     def reactForAnswersMailOptions(self, answer, folder, mailIndex):
         match answer:
             case 0:
-                folder.deleteMail(mailIndex)
+                return
             case 1:
+                if (folder.name == self.active.trash):
+                    folder.deleteMail(mailIndex)
+                    return
+                self.getFolderOfActive(self.active.trash).append(folder.mails[mailIndex])
+                folder.deleteMail(mailIndex)
+            case 2:
                 whereName = input("where? ")
                 self.getFolderOfActive(whereName).append(folder.mails[mailIndex])
                 folder.deleteMail(mailIndex)
-            case 2:
-                content = input("Enter your Answer (Dont hit enter unless your finished. For linebreaks use \\n): ")
+            case 3:
+                content = input("Enter your answer (Dont hit enter unless your finished. For linebreaks use \\n): ")
                 attachmentsPath = input("Enter filepath to your attachement in the attachements folder (PATH or leave blank): ")
                 safety = input("Do you want to send the message? (y/n) ")
 
                 if(self.checkSafetyQuestion(safety)):
-                    topic = "AW: ", folder.mails[answer].topic
-                    content = content + "Original Message: ", folder.mails[answer].content
-                    attachmentsPath = folder.mails[answer].attachmentsPath + attachmentsPath
-                    self.active.sendMail(topic, folder.mails[answer].sender, self.active.mail, folder.mails[answer].bcc, folder.mails[answer].cc, content, attachmentsPath)
+                    topic = "AW: " + folder.mails[mailIndex].topic
+                    content = content + "\n Original Message: " + folder.mails[mailIndex].content
+                    attachmentsPath = folder.mails[mailIndex].attachmentsPath + attachmentsPath
+                    self.active.sendMail(topic, folder.mails[mailIndex].sender, self.active.mail, folder.mails[mailIndex].bcc, folder.mails[mailIndex].cc, content, attachmentsPath)
+            case 4:
+                content = input("Enter your message (Dont hit enter unless your finished. For linebreaks use \\n): ")
+                attachmentsPath = input("Enter filepath to your attachement in the attachements folder (PATH or leave blank): ")
+                safety = input("Do you want to send the message? (y/n) ")
+
+                if(self.checkSafetyQuestion(safety)):
+                    topic = "AW: " + folder.mails[mailIndex].topic
+                    content = content + "\n Original Message: " + folder.mails[mailIndex].content
+                    attachmentsPath = folder.mails[mailIndex].attachmentsPath + attachmentsPath
+                    self.active.sendMail(topic, folder.mails[mailIndex].sender, self.active.mail, folder.mails[mailIndex].bcc, folder.mails[mailIndex].cc, content, attachmentsPath)
     def askForActionsNoLogin(self):
-        print(self.TEXTdivider)
-        print("MENU")
-        print(self.TEXTdivider)
+        self.TEXTheading("MENU")
 
         print("What do you want to do?")
         print("0: STOP")
@@ -194,11 +228,11 @@ class MailManagementSystem:
             case "0":
                 self.running = False
             case "1":
-                self.createUser()
+                self.createUserQ()
             case "2":
                 self.logIntoUser()
             case "3":
-                self.deleteUser()
+                self.deleteUserQ()
             case _:
                 print("LOL")
 

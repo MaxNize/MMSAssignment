@@ -13,7 +13,6 @@ class User:
         self.trash = "Trash" 
 
     def sendMail(self, topic, to, sender, bcc, cc, content, attachmentsPath):
-        print("DEBUG: User.sendMail")
         for i in self.kategories:
             if (i.name == self.outbox):
                 i.createMail(topic, to, sender, bcc, cc, content, attachmentsPath)
