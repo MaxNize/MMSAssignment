@@ -27,6 +27,7 @@ class MailManagementSystem:
     def TEXTnoUserWithUserNameAvailable(self, userName):
         return "No User with Username " + userName + " available!"
     
+    #!ausgelagert
     def TEXTheading(self, text):
         print(self.TEXTdivider)
         print(text)
@@ -81,7 +82,7 @@ class MailManagementSystem:
             print("Your email is valid")
         else:
             print("Unvalid email entered! Please try again.")
-            self.createUser()
+            self.createUserQ()
            
             
         pw = input("Please enter a Password: ")
@@ -90,7 +91,7 @@ class MailManagementSystem:
             self.createUser(userName, firstName, lastName, mail, pw)
         else:
             print("The entered passwords do not match! Please try again.")
-            self.createUser()
+            self.createUserQ()
 
     def deleteUserQ(self):
         self.TEXTheading("DELETING USER")
