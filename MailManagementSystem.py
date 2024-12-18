@@ -1,4 +1,5 @@
 import User
+import re
 
 class MailManagementSystem:
     def __init__(self):
@@ -25,9 +26,23 @@ class MailManagementSystem:
         userName = input(self.TEXTenterUserName)
         firstName = input("Please enter a Firstname: ")
         lastName = input("Please enter a Lastname: ")
-        mail = input("Please enter a Mail: ")
+        mail = input("Please enter a Mail: ") 
+        emailPattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+        if re.match(emailPattern, mail):
+            print("Your email is valid")
+        else:
+            print("Unvalid email entered! Please try again.")
+            self.createUser()
+           
+            
         pw = input("Please enter a Password: ")
-        self.users.append(User.User(userName, firstName, lastName, mail, pw))
+        pwTest = input("Please enter your verify your password: ")
+        if pwTest == pw:
+            self.users.append(User.User(userName, firstName, lastName, mail, pw))
+        else:
+            print("The entered passwords do not match! Please try again.")
+            self.createUser()
+            
 
     def deleteUser(self):
         print(self.TEXTdivider)

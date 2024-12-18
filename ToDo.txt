@@ -30,6 +30,6 @@ ToDo Max:
 
 
 ToDo Dimi:
--MMS.createUser: validate mail -> RegEx
+-MMS.createUser: validate mail -> RegEx ([a-zA-Z0-9\.\-]+@[a-zA-Z]+\.[a-z]+)
 -MMS.createUser: validate pw
--MMS.createUser: check if user exists
+-MMS.createUser: check if user ex0ists
