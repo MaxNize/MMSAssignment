@@ -7,3 +7,7 @@ class Kategory:
 
     def createMail(self, topic, to, sender, bcc, cc, content, attachmentsPath):
         self.mails.append(Mail.Mail(topic, to, sender, bcc, cc, content, attachmentsPath))
+
+    def deleteMail(self, mailIndex):
+        if (mailIndex < len(self.mails)):
+            del self.mails[mailIndex]

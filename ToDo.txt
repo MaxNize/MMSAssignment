@@ -1,25 +1,28 @@
 Backlog:
 -MMS.askForActionsLogin
-
+-input safety
+-folder loop
 -Mail: TimeStamp
 -I want to go back from every action at
     any time
 -DB-Anbindung
 
 BUGS:
-
+-little more spacing between prompts could be nice
+-entering not a number crashes
+-if answered mail: Layout is fucked
 
 ToDo Max:
 -ToDo
 
 -inProgress
+
+-Testing
 --MMS.mainloop.openFolder
+---forward
 ---delete mail
 ---move to folder
 ---answer
----forward
--Testing
-
 
 -Done
 --MMS.createUser
