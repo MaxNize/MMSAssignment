@@ -1,8 +1,12 @@
+import re
+
+
 class System:
     def __init__(self):
         #These are for same texts everywhere
         self.TEXTdivider = "********************************"
         self.TEXTspacer = "\n\n\n\n\n\n\n\n\n\n"
+        self.emailPattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
         #These are the vars every System needs
         self.running = True
         #These are System specific vars
@@ -30,7 +34,11 @@ class System:
         if (input == "y" or input == "Y" or input == "yes" or input == "Yes"):
             return True
         return False
-
+    
+    def checkForMailpattern(self, string):
+        if re.match(self.emailPattern, string):
+            return True
+        return False
     #alsways ask something
     def baseQuestionnaire(self):
         print(self.TEXTspacer)

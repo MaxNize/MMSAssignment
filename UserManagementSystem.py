@@ -68,7 +68,23 @@ What do you want to do?
         self.updateBasedOnActivity()
 
     def writeMail(self):
-        pass
+        self.TEXTheading("WRITE MAIL")
+
+        topic = input("Enter Topic: ")
+        to = input("Enter Reciever: ")
+        if (self.checkForMailpattern(to)):
+            bcc = input("Enter Bcc (or leave blank): ")
+            cc = input("Enter Cc (or leave blank): ")
+            content = input("Enter your mail (Dont hit enter unless your finished. For linebreaks use \\n): ")
+            attachmentsPath = input("Enter filepath to your attachement in the attachements folder (PATH or leave blank): ")
+
+            safety = input("Do you want to send the message? (y/n) ")
+            if(self.checkSafetyQuestion(safety)):
+                self.active.sendMail(topic, to, self.active.mail, bcc, cc, content, attachmentsPath)
+                print("The Mail has been added to your Outbox!")
+        else:
+            print("That's not an email!")
+            self.writeMail()
 
     def openFolder(self):
         pass
@@ -80,8 +96,7 @@ What do you want to do?
         firstName = input("Please enter a Firstname: ")
         lastName = input("Please enter a Lastname: ")
         mail = input("Please enter a Mail: ") 
-        emailPattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
-        if re.match(emailPattern, mail):
+        if (self.checkForMailpattern(mail)):
             print("Your email is valid")
         else:
             print("Unvalid email entered! Please try again.")
