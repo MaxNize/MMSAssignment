@@ -1,6 +1,6 @@
 import Mail
 
-class Kategory:
+class Folder:
     def __init__(self, name) -> None:
         self.name = name
         self.mails = []

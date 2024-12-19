@@ -7,6 +7,8 @@ class System:
         self.TEXTdivider = "********************************"
         self.TEXTspacer = "\n\n\n\n\n\n\n\n\n\n"
         self.emailPattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+        self.TEXTenterUserName = "Please enter a Username: "
+        self.TEXTenterYourPw = "Please enter your Password: "
         #These are the vars every System needs
         self.running = True
         #These are System specific vars
@@ -35,12 +37,16 @@ class System:
             return True
         return False
     
+    def initing(self):
+        pass
+    
     def checkForMailpattern(self, string):
         if re.match(self.emailPattern, string):
             return True
         return False
     #alsways ask something
     def baseQuestionnaire(self):
+        self.initing()
         print(self.TEXTspacer)
         self.TEXTheading(self.title)
         answer = self.safeQuestion(self.baseQuestion, "int")

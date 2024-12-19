@@ -16,8 +16,7 @@ What do you want to do?
 '''
         self.users = []
         self.active = False
-        self.TEXTenterUserName = "Please enter a Username: "
-        self.TEXTenterYourPw = "Please enter your Password: "
+        self.FolderManager = False
 
 
     def checkForExistingUsername(self, userName):
@@ -87,7 +86,18 @@ What do you want to do?
             self.writeMail()
 
     def openFolder(self):
-        pass
+        success = False
+        while (not success):
+            for i in self.active.folders:
+                print(i.name)
+            folder = input("Which Folder do you want to open? ")
+            for i in self.active.folders:
+                if (i.name == folder):
+                    self.FolderManager.active = i
+                    success = True
+                else:
+                    print("No Folder with that name available!")
+        self.FolderManager.mainloop()
 
     def createUserQ(self):
         self.TEXTheading("CREATE USER")
@@ -157,6 +167,9 @@ What do you want to do?
             return True
         except:
             return False
+        
+    def initing(self):
+        self.updateBasedOnActivity()
 
     def specificQuestionnaire(self, answer):
         if (not self.active):
@@ -176,5 +189,3 @@ What do you want to do?
                     self.writeMail()
                 case 3:
                     self.openFolder()
-
-        self.updateBasedOnActivity()
