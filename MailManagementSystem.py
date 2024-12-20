@@ -10,13 +10,14 @@ class MailManagementSystem:
         self.TEXTenterYourPw = "Please enter your Password: "
         #These are actual attributes. We need them :)
         self.users = []
+        userNameList = ["dimi","ada","lok"]
         self.running = True
         self.active = False
 
     ########################################################################
     #This is only for Testing purposes
     def SETUPFORDEBUGGING(self):
-        self.users.append(User.User("m", "m", "m", "m", "m"))
+        self.users.append(User.User("m", "m", "m", "m@m.m", "m"))
         self.active = self.users[0]
         self.active.sendMail("Hey", "to", self.active.mail, "", "", "Hey jo whatsup", "")
 
@@ -72,26 +73,22 @@ class MailManagementSystem:
     #These are the main functions that are called by the user. They should be small and clean. Call a helper function :)
     def createUserQ(self):
         self.TEXTheading("CREATE USER")
-
-        userName = input(self.TEXTenterUserName)
-        firstName = input("Please enter a Firstname: ")
-        lastName = input("Please enter a Lastname: ")
-        mail = input("Please enter a Mail: ") 
-        emailPattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
-        if re.match(emailPattern, mail):
-            print("Your email is valid")
-        else:
-            print("Unvalid email entered! Please try again.")
-            self.createUserQ()
-           
-            
-        pw = input("Please enter a Password: ")
-        pwTest = input("Please enter your verify your password: ")
-        if pwTest == pw:
+        while True:
+            userName = input(self.TEXTenterUserName)
+            firstName = input("Please enter a Firstname: ")
+            lastName = input("Please enter a Lastname: ")
+            mail = input("Please enter a Mail: ") 
+            emailPattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+            if not re.match(emailPattern, mail):
+                print("Invalid email entered! Please try again.")
+                continue
+            pw = input("Please enter a Password: ")
+            pwTest = input("Please enter your verify your password: ")
+            if pwTest != pw:
+                print("The entered passwords do not match! Please try again.")
+                continue
             self.createUser(userName, firstName, lastName, mail, pw)
-        else:
-            print("The entered passwords do not match! Please try again.")
-            self.createUserQ()
+            break
 
     def deleteUserQ(self):
         self.TEXTheading("DELETING USER")
@@ -122,7 +119,7 @@ class MailManagementSystem:
             if (user.checkPw(pw)):
                 self.active = user
                 print("your now Logged in, ", userName,"!")
-                return
+                return    
         print(self.TEXTnoUserWithUserNameAvailable(userName))
 
     def writeMail(self):
