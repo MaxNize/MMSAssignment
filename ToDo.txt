@@ -9,8 +9,6 @@ Backlog:
 -Contacts
 
 BUGS:
--unvalid -> invalid
--two times pw entering needed
 -little more spacing between prompts could be nice
 -entering not a number crashes
 -if answered mail: Layout is fucked
@@ -26,31 +24,18 @@ ToDo Max:
 ---delete mail
 ---move to folder
 ---answer
+--MMS.createUser: validate pw
+--unvalid -> invalid
+--two times pw entering needed
 
 -Done
 --MMS.createUser
 --MMS.logIntoUser
 --MMS.askForActionsLogin.logout
 --MMS.mainloop.writeMail
+--MMS.createUser: validate mail -> RegEx
 
 
 
 ToDo Dimi:
--MMS.createUser: validate mail -> RegEx
--MMS.createUser: validate pw
--MMS.createUser: check if user exists
-
-
-moving mails:
-MMS2.specificQuestionnaire(moveMailQ(
-    "Where?"
-    moveMail(
-        if cacnel: return
-        if exists: append to folder
-        deleteMail(
-            foldermanager.active.mails.remove(self.active)
-            self.active = False
-            self.running = False
-        )
-    )
-))
+--MMS.createUser: check if user exists

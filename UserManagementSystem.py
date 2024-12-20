@@ -113,7 +113,7 @@ What do you want to do?
         if (self.checkForMailpattern(mail)):
             print("Your email is valid")
         else:
-            print("Unvalid email entered! Please try again.")
+            print("Invalid email entered! Please try again.")
             self.createUserQ()
            
             
