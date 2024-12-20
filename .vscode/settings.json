@@ -1,0 +1,16 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "C:\\Users\\mamueller\\Documents\\Projekte\\Priv\\NextJS\\test\\db/sqlite.db",
+            "name": "data"
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "mms",
+            "database": "${workspaceFolder:MMSAssignment}/db/data.db"
+        }
+    ]
+}
