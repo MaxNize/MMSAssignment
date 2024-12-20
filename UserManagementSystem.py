@@ -15,7 +15,6 @@ What do you want to do?
 3: delete a User
 '''
         self.users = []
-        self.users.append(User("dimi","dim","dim","dim@gmail.com","1"))
         self.active = False
         self.TEXTenterUserName = "Please enter a Username: "
         self.TEXTenterYourPw = "Please enter your Password: "
