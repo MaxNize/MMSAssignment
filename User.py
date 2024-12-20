@@ -1,13 +1,16 @@
 import Folder
 
 class User:
-    def __init__(self, userName, firstName, lastName, mail, pw):
+    def __init__(self, userName, firstName, lastName, mail, pw, default):
         self.userName = userName
         self.firstName = firstName
         self.lastName = lastName
         self.mail = mail
         self._pw = pw
-        self.folders = [Folder.Folder("Inbox"), Folder.Folder("Sent"), Folder.Folder("Trash")]
+        if (default):
+            self.folders = [Folder.Folder("Inbox"), Folder.Folder("Sent"), Folder.Folder("Trash")]
+        else:
+            self.folders = []
         self.inbox = "Recieved"
         self.outbox = "Sent"
         self.trash = "Trash" 
@@ -22,6 +25,12 @@ class User:
         for i in self.folders:
             out.append(i.name)
         return out
+    
+    def getFoldersForSave(self):
+        out = ""
+        for i in self.folders:
+            out += i.name + ","
+        return out[:-1]
     
     def checkForExistingFolder(self, folderName):
         for i in self.folders:
@@ -41,3 +50,6 @@ class User:
         
     def checkPw(self, pw):
         return pw == self._pw
+    
+    def getPw(self):
+        return self._pw

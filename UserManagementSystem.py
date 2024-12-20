@@ -1,3 +1,4 @@
+from Folder import Folder
 from System import System
 from User import User
 import re
@@ -165,7 +166,17 @@ What do you want to do?
         return False
 
     def createUser(self, userName, firstName, lastName, mail, pw):
-        self.users.append(User(userName, firstName, lastName, mail, pw))
+        self.users.append(User(userName, firstName, lastName, mail, pw, True))
+
+    def createUserSetup(self, userName, firstName, lastName, mail, pw, folders, inbox, outbox, trash):
+        user = User(userName, firstName, lastName, mail, pw, False)
+        folderNames = folders.split(",")
+        for i in folderNames:
+            user.folders.append(Folder(i))
+        user.inbox = inbox
+        user.outbox = outbox
+        user.trash = trash
+        self.users.append(user)
 
     def deleteUser(self, userName):
         try:
