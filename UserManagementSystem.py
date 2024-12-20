@@ -16,6 +16,7 @@ What do you want to do?
 '''
         self.users = []
         self.FolderManager = False
+        self.ContactsManager = False
 
 
     def checkForExistingUsername(self, userName):
@@ -55,6 +56,7 @@ What do you want to do?
 1: Logout
 2: Write an Email
 3: Open Folder
+4: Contacts
 '''
 
     def updateBasedOnActivity(self):
@@ -68,7 +70,7 @@ What do you want to do?
         self.TEXTheading("WRITE MAIL")
 
         topic = input("Enter Topic: ")
-        to = input("Enter Reciever: ")
+        to = input("Enter Receiver: ")
         if (self.checkForMailpattern(to)):
             bcc = input("Enter Bcc (or leave blank): ")
             cc = input("Enter Cc (or leave blank): ")
@@ -171,6 +173,9 @@ What do you want to do?
             return True
         except:
             return False
+    
+    def contacts(self):
+        self.ContactsManager.mainloop()
         
     def initing(self):
         self.updateBasedOnActivity()
@@ -192,3 +197,5 @@ What do you want to do?
                     self.writeMail()
                 case 3:
                     self.openFolder()
+                case 4:
+                    self.contacts() 
