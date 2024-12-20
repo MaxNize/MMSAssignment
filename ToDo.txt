@@ -39,3 +39,18 @@ ToDo Dimi:
 -MMS.createUser: validate mail -> RegEx
 -MMS.createUser: validate pw
 -MMS.createUser: check if user exists
+
+
+moving mails:
+MMS2.specificQuestionnaire(moveMailQ(
+    "Where?"
+    moveMail(
+        if cacnel: return
+        if exists: append to folder
+        deleteMail(
+            foldermanager.active.mails.remove(self.active)
+            self.active = False
+            self.running = False
+        )
+    )
+))

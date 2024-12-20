@@ -23,7 +23,19 @@ class User:
             out.append(i.name)
         return out
     
-    def getMailsOfKategory(self, kategoryName):
+    def checkForExistingFolder(self, folderName):
+        for i in self.folders:
+            if (i.name == folderName):
+                return True
+        return False
+    
+    def getFolder(self, folderName):
+        for i in self.folders:
+            if (i.name == folderName):
+                return i
+        return None
+    
+    def getMailsOfFolder(self, folderName):
         for i in self.folders:
             return i.mails
         

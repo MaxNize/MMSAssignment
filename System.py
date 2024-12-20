@@ -14,6 +14,7 @@ class System:
         #These are System specific vars
         self.baseQuestion = "Do you want to do something? "
         self.title = "SYSTEM"
+        self.active = False
 
     #System wide used functions
     #we like safe questioning. it makes your program less crashy
@@ -61,5 +62,8 @@ class System:
                 print("your thing")
 
     def mainloop(self):
+        self.running = True
         while(self.running):
             self.baseQuestionnaire()
+        
+        self.active = False

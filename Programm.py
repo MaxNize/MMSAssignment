@@ -1,5 +1,5 @@
 from FolderManagementSystem import FolderManagementSystem
-from MailManagementSystem2 import MailManagementSystem
+from MailManagementSystem import MailManagementSystem
 from UserManagementSystem import UserManagementSystem
 
 
@@ -11,6 +11,8 @@ class Programm:
 
         self.UserManager.FolderManager = self.FolderManager
         self.FolderManager.MailManager = self.MailManager
+        self.MailManager.FolderManager = self.FolderManager
+        self.MailManager.UserManager = self.UserManager
 
     def mainloop(self):
         self.UserManager.mainloop()

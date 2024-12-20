@@ -9,10 +9,9 @@ What do you want to do?
 0: Close Folder
 No Mails in this Folder
 '''
-        self.active = False
         self.MailManager = False
 
-        self.updateBasedOnActivity()#make sure that that works    
+        self.updateBasedOnActivity()
 
     def updateTitle(self):
         if (not self.active):

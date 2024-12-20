@@ -15,7 +15,6 @@ What do you want to do?
 3: delete a User
 '''
         self.users = []
-        self.active = False
         self.FolderManager = False
 
 
@@ -64,7 +63,6 @@ What do you want to do?
 
     def logout(self):
         self.active = False
-        self.updateBasedOnActivity()
 
     def writeMail(self):
         self.TEXTheading("WRITE MAIL")
@@ -90,14 +88,20 @@ What do you want to do?
         while (not success):
             for i in self.active.folders:
                 print(i.name)
-            folder = input("Which Folder do you want to open? ")
-            for i in self.active.folders:
-                if (i.name == folder):
-                    self.FolderManager.active = i
-                    success = True
-                else:
-                    print("No Folder with that name available!")
-        self.FolderManager.mainloop()
+            folderName = input("Which Folder do you want to open? ")
+            print("DEBUG: "+ folderName)
+            print("DEBUG: ", self.active.checkForExistingFolder(folderName))
+            print("DEBUG: ", self.active.getFolder(folderName))
+            if (self.active.checkForExistingFolder(folderName)):
+                self.FolderManager.active = self.active.getFolder(folderName)
+                print("DEBUG: ", self.active)
+                print("DEBUG: ", self.FolderManager.active)
+                print("DEBUG: before mainloop")
+                self.FolderManager.mainloop()
+                print("DEBUG: after mainloop")
+                success = True
+            else:
+                print("No Folder with that name available!")
 
     def createUserQ(self):
         self.TEXTheading("CREATE USER")
@@ -175,7 +179,6 @@ What do you want to do?
         if (not self.active):
             match answer:
                 case 1:
-                    print(1)
                     self.createUserQ()
                 case 2:
                     self.loginQ()
