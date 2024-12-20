@@ -15,6 +15,7 @@ What do you want to do?
 3: delete a User
 '''
         self.users = []
+        self.users.append(User("dimi","dim","dim","dim@gmail.com","1"))
         self.active = False
         self.TEXTenterUserName = "Please enter a Username: "
         self.TEXTenterYourPw = "Please enter your Password: "
@@ -84,7 +85,7 @@ What do you want to do?
         if re.match(emailPattern, mail):
             print("Your email is valid")
         else:
-            print("Unvalid email entered! Please try again.")
+            print("Invalid email entered! Please try again.")
             self.createUserQ()
            
             
