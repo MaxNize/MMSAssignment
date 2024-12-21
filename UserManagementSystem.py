@@ -108,25 +108,26 @@ What do you want to do?
 
     def createUserQ(self):
         self.TEXTheading("CREATE USER")
-
-        userName = input(self.TEXTenterUserName)
-        firstName = input("Please enter a Firstname: ")
-        lastName = input("Please enter a Lastname: ")
-        mail = input("Please enter a Mail: ") 
-        if (self.checkForMailpattern(mail)):
-            print("Your email is valid")
-        else:
-            print("Invalid email entered! Please try again.")
-            self.createUserQ()
-           
+        
+        while True:
+             userName = input(self.TEXTenterUserName)
+             firstName = input("Please enter a firstname: ")
+             lastName = input("Please enter a lastname: ")
+             mail = input("Please enter a mail: ") 
+             if not self.checkForMailpattern(mail):
+                 print("Invalid mail entered! Please try again.")
+                 continue
+             print("Your mail is valid")
+             pw = input("Please enter a Password: ")
+             pwTest = input("Please enter your verify your password: ")
+             if pwTest != pw:
+                 print("The entered passwords do not match! Please try again.")
+                 continue
+             self.createUser(userName, firstName, lastName, mail, pw)
+             print("User was successfully created!")
+             break
             
-        pw = input("Please enter a Password: ")
-        pwTest = input("Please enter your verify your password: ")
-        if pwTest == pw:
-            self.createUser(userName, firstName, lastName, mail, pw)
-        else:
-            print("The entered passwords do not match! Please try again.")
-            self.createUserQ()
+            
 
     def loginQ(self):
         self.TEXTheading("LOGIN")
