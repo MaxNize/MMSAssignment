@@ -35,7 +35,7 @@ class Programm:
             print("DEBUG: " , i.folders)
             for j in i.folders:
                 for k in j.mails:
-                    dataMails.append({"topic": k.topic, "to": k.to, "sender": k.sender, "bcc": k.bcc, "cc": k.cc, "content": k.content, "attachmentsPath": k.attachmentsPath, "folder": j.name, "userName": i.userName})
+                    dataMails.append({"subject": k.subject, "to": k.to, "sender": k.sender, "bcc": k.bcc, "cc": k.cc, "content": k.content, "attachmentsPath": k.attachmentsPath, "folder": j.name, "userName": i.userName})
 
         db.deleteUsers()
         db.setUsers(dataUsers)

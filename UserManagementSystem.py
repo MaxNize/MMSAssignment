@@ -70,7 +70,7 @@ What do you want to do?
     def writeMail(self):
         self.TEXTheading("WRITE MAIL")
 
-        topic = input("Enter Topic: ")
+        subject = input("Enter subject: ")
         to = input("Enter Receiver: ")
         if (self.checkForMailpattern(to)):
             bcc = input("Enter Bcc (or leave blank): ")
@@ -80,7 +80,7 @@ What do you want to do?
 
             safety = input("Do you want to send the message? (y/n) ")
             if(self.checkSafetyQuestion(safety)):
-                self.active.sendMail(topic, to, self.active.mail, bcc, cc, content, attachmentsPath)
+                self.active.sendMail(subject, to, self.active.mail, bcc, cc, content, attachmentsPath)
                 print("The Mail has been added to your Outbox!")
         else:
             print("That's not an email!")

@@ -17,7 +17,7 @@ trash TEXT);
               ''')
     c.execute('''CREATE TABLE IF NOT EXISTS mails (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
-topic TEXT,
+subject TEXT,
 "to" TEXT,
 sender TEXT,
 bcc TEXT,
@@ -26,6 +26,7 @@ content TEXT,
 attachmentsPath TEXT,
 folder TEXT,
 userName Text,
+timestamp Text,
 FOREIGN KEY (userName) REFERENCES users(userName));
               ''')
     c.execute('''CREATE TABLE IF NOT EXISTS contacts (
@@ -34,11 +35,26 @@ firstName TEXT,
 lastName TEXT,
 mail TEXT,
 userName Text,
+phone Text,
 FOREIGN KEY (userName) REFERENCES users(userName));
               ''')
 
     conn.commit()
     conn.close()
+
+def setupDBForTesting():
+    conn = sqlite3.connect('db/data.db')
+    c = conn.cursor()
+
+    c.execute('DELETE FROM users')
+    c.execute('DELETE FROM mails')
+    c.execute('DELETE FROM contacts')
+
+    conn.commit()
+    conn.close()
+
+    setUsers([{"userName": "MMM", "firstName": "MMM","lastName": "MMM", "mail": "MMM@M.M", "pw": "123", "folders": "Inbox,Sent,Trash", "inbox": "Inbox","outbox":"Sent", "trash": "Trash"},{"userName": "M", "firstName": "M","lastName": "M", "mail": "M@M.M", "pw": "123", "folders": "Inbox,Sent,Trash", "inbox": "Inbox","outbox":"Sent", "trash": "Trash"}])   
+    setMails([{"subject": "test", "to": "m@m.m", "sender": "m@m.m", "bcc": "m@m.m", "cc": "m@m.m", "content": "test", "attachmentsPath": "test", "folder": "Sent", "userName": "m"}])
 
 #db.setUsers([{"userName": "MMM", "firstName": "MMM","lastName": "MMM", "mail": "MMM@M.M", "pw": "123", "folders": "Inbox,Sent,Trash", "inbox": "Inbox","outbox":"Sent", "trash": "Trash"},{"userName": "M", "firstName": "M","lastName": "M", "mail": "M@M.M", "pw": "123", "folders": "Inbox,Sent,Trash", "inbox": "Inbox","outbox":"Sent", "trash": "Trash"}])       
 def getUsers():
@@ -92,7 +108,7 @@ def deleteUsers():
     conn.commit()
     conn.close()
 
-#db.setMails([{"topic": "test", "to": "m@m.m", "sender": "m@m.m", "bcc": "m@m.m", "cc": "m@m.m", "content": "test", "attachmentsPath": "test", "folder": "Sent", "userName": "m"}])
+#db.setMails([{"subject": "test", "to": "m@m.m", "sender": "m@m.m", "bcc": "m@m.m", "cc": "m@m.m", "content": "test", "attachmentsPath": "test", "folder": "Sent", "userName": "m"}])
 def getMails():
     conn = sqlite3.connect('db/data.db')
     c = conn.cursor()
@@ -109,14 +125,14 @@ def setMails(data):
 
     # Prepare the SQL INSERT statement
     sql = '''
-    INSERT INTO mails (topic, "to", sender, bcc, cc, content, attachmentsPath, folder, userName)
+    INSERT INTO mails (subject, "to", sender, bcc, cc, content, attachmentsPath, folder, userName)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     '''
 
     # Prepare data as a list of tuples
     values = [
         (
-            mail["topic"],
+            mail["subject"],
             mail["to"],
             mail["sender"],
             mail["bcc"],

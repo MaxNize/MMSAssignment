@@ -43,10 +43,10 @@ What do you want to do?
             worked = self.moveMail(destination)
 
     def answerMail(self, content, attachmentsPath):
-        topic = "AW: " + self.active.topic
+        subject = "AW: " + self.active.subject
         content = content + "\n Original Message: " + self.active.content
         attachmentsPath = self.active.attachmentsPath + attachmentsPath
-        self.UserManager.active.sendMail(topic, self.active.sender, self.UserManager.active.mail, self.active.bcc, self.active.cc, content, attachmentsPath)
+        self.UserManager.active.sendMail(subject, self.active.sender, self.UserManager.active.mail, self.active.bcc, self.active.cc, content, attachmentsPath)
 
 
     def answerMailQ(self):
@@ -79,7 +79,7 @@ What do you want to do?
         if (not self.active):
             self.title = "MAIL : No Mail opened"
             return
-        self.title = "MAIL : " + self.active.topic
+        self.title = "MAIL : " + self.active.subject
 
     def initing(self):
         self.updateBasedOnActivity()
