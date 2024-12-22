@@ -58,6 +58,7 @@ What do you want to do?
 2: Write an Email
 3: Open Folder
 4: Contacts
+5: Setup in, out and trash Folder
 '''
 
     def updateBasedOnActivity(self):
@@ -91,7 +92,13 @@ What do you want to do?
         while (not success):
             for i in self.active.folders:
                 print(i.name)
-            folderName = input("Which Folder do you want to open? ")
+            folderName = input("Which Folder do you want to open or create(print: create)? ")
+            if (folderName == "create"):
+                name = input("Enter the name of the new Folder: ")
+                if (self.active.checkForExistingFolder(name)):
+                    print("Folder already exists!")
+                    return
+                self.active.folders.append(Folder(name))
             if (self.active.checkForExistingFolder(folderName)):
                 self.FolderManager.active = self.active.getFolder(folderName)
                 self.FolderManager.mainloop()

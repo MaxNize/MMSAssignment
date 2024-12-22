@@ -54,7 +54,7 @@ def setupDBForTesting():
     conn.close()
 
     setUsers([{"userName": "MMM", "firstName": "MMM","lastName": "MMM", "mail": "MMM@M.M", "pw": "123", "folders": "Inbox,Sent,Trash", "inbox": "Inbox","outbox":"Sent", "trash": "Trash"},{"userName": "M", "firstName": "M","lastName": "M", "mail": "M@M.M", "pw": "123", "folders": "Inbox,Sent,Trash", "inbox": "Inbox","outbox":"Sent", "trash": "Trash"}])   
-    setMails([{"subject": "test", "to": "m@m.m", "sender": "m@m.m", "bcc": "m@m.m", "cc": "m@m.m", "content": "test", "attachmentsPath": "test", "folder": "Sent", "userName": "m"}])
+    setMails([{"subject": "test", "to": "m@m.m", "sender": "m@m.m", "bcc": "m@m.m", "cc": "m@m.m", "content": "test", "attachmentsPath": "test", "folder": "Sent", "userName": "M"}])
 
 #db.setUsers([{"userName": "MMM", "firstName": "MMM","lastName": "MMM", "mail": "MMM@M.M", "pw": "123", "folders": "Inbox,Sent,Trash", "inbox": "Inbox","outbox":"Sent", "trash": "Trash"},{"userName": "M", "firstName": "M","lastName": "M", "mail": "M@M.M", "pw": "123", "folders": "Inbox,Sent,Trash", "inbox": "Inbox","outbox":"Sent", "trash": "Trash"}])       
 def getUsers():
