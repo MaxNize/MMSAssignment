@@ -65,7 +65,22 @@ What do you want to do?
             print("Mail sent!")
             return
         print("Canceled")
-#
+
+    def forwardQ(self):
+        while True:
+            to = input("Enter Receiver: ")
+            if (self.checkForMailpattern(to)):
+                msg = input("Enter your message: ")
+                if (self.checkSafetyQuestion(input("Do you want to send the message? (y/n) "))):
+                    self.forwardMail(to, msg)
+                    return
+                return
+            print("That's not an email!")
+
+    def forwardMail(self, to, msg):
+        self.UserManager.active.sendMail("FW: " + self.active.subject, to, self.UserManager.active.mail, self.active.cc, self.active.bcc, msg + "\n Original Message: \n" + self.active.content, self.active.attachmentsPath, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        print("Mail sent!")
+
     def updateBasedOnActivity(self):
         self.updadteBaseQuestion()
         self.updateTitle()
