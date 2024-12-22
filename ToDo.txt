@@ -20,7 +20,7 @@ ToDo Max:
 
 -Testing
 -
----forward (Funtion be found)
+---forward (Funtion not found)
 
 ---answer (is working but every Message is sent to "Sent" and not to Inbox / in Sent messages should only be the message that you sent)
 
