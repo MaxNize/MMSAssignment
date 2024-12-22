@@ -19,6 +19,7 @@ What do you want to do?
         self.users = []
         self.FolderManager = False
         self.ContactsManager = False
+        self.SearchManager = False
 
 
     def checkForExistingUsername(self, userName):
@@ -59,6 +60,8 @@ What do you want to do?
 2: Write an Email
 3: Open Folder
 4: Contacts
+5: Setup in, out and trash Folder
+6: Search for mails
 '''
 
     def updateBasedOnActivity(self):
@@ -71,7 +74,7 @@ What do you want to do?
     def writeMail(self):
         self.TEXTheading("WRITE MAIL")
 
-        topic = input("Enter Topic: ")
+        subject = input("Enter subject: ")
         to = input("Enter Receiver: ")
         if (self.checkForMailpattern(to)):
             bcc = input("Enter Bcc (or leave blank): ")
@@ -82,7 +85,7 @@ What do you want to do?
             time = time.strftime("%Y-%m-%d %H:%M:%S")
             safety = input("Do you want to send the message? (y/n) ")
             if(self.checkSafetyQuestion(safety)):
-                self.active.sendMail(topic, to, self.active.mail, bcc, cc, content, attachmentsPath, time)
+                self.active.sendMail(subject, to, self.active.mail, bcc, cc, content, attachmentsPath)
                 print("The Mail has been added to your Outbox!")
         else:
             print("That's not an email!")
@@ -93,17 +96,17 @@ What do you want to do?
         while (not success):
             for i in self.active.folders:
                 print(i.name)
-            folderName = input("Which Folder do you want to open? ")
-            print("DEBUG: "+ folderName)
-            print("DEBUG: ", self.active.checkForExistingFolder(folderName))
-            print("DEBUG: ", self.active.getFolder(folderName))
+            folderName = input("Which Folder do you want to open or create(print: create)? ")
+            if (folderName == "create"):
+                name = input("Enter the name of the new Folder: ")
+                if (self.active.checkForExistingFolder(name)):
+                    print("Folder already exists!")
+                    return
+                self.active.folders.append(Folder(name))
+                return
             if (self.active.checkForExistingFolder(folderName)):
                 self.FolderManager.active = self.active.getFolder(folderName)
-                print("DEBUG: ", self.active)
-                print("DEBUG: ", self.FolderManager.active)
-                print("DEBUG: before mainloop")
                 self.FolderManager.mainloop()
-                print("DEBUG: after mainloop")
                 success = True
             else:
                 print("No Folder with that name available!")
@@ -162,6 +165,32 @@ What do you want to do?
                 return
         print(self.TEXTnoUserWithUserNameAvailable(userName))
 
+    def setupFoldersQ(self):
+        self.TEXTheading("SETUP FOLDERS")
+
+        for i in self.active.folders:
+                print(i.name)
+
+        inbox = input("Enter the name of your Inbox: ")
+        if (not self.active.checkForExistingFolder(inbox)):
+            print("No Folder available")
+            return
+        outbox = input("Enter the name of your Outbox: ")
+        if (not self.active.checkForExistingFolder(outbox)):
+            print("No Folder available")
+            return
+        trash = input("Enter the name of your Trash: ")
+        if (not self.active.checkForExistingFolder(trash)):
+            print("No Folder available")
+            return
+        
+        self.setupFolders(inbox, outbox, trash)
+
+    def setupFolders(self, inbox, outbox, trash):
+        self.active.inbox = inbox
+        self.active.outbox = outbox
+        self.active.trash = trash
+
     def login(self, user, pw):
         if (user.checkPw(pw)):
             self.active = user
@@ -181,6 +210,9 @@ What do you want to do?
         user.trash = trash
         self.users.append(user)
 
+    def searchMails(self):
+        self.SearchManager.mainloop()
+            
     def deleteUser(self, userName):
         try:
             self.users.remove(self.getUser(userName))
@@ -214,3 +246,7 @@ What do you want to do?
                     self.openFolder()
                 case 4:
                     self.contacts() 
+                case 5:
+                    self.setupFoldersQ()
+                case 6:
+                    self.searchMails()

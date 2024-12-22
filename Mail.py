@@ -1,6 +1,6 @@
 class Mail:
-    def __init__(self, topic, to, sender, bcc, cc, content, attachmentsPath) -> None:
-        self.topic = topic
+    def __init__(self, subject, to, sender, bcc, cc, content, attachmentsPath) -> None:
+        self.subject = subject
         self.to = to
         self.sender = sender
         self.bcc = bcc
@@ -9,4 +9,4 @@ class Mail:
         self.attachmentsPath = attachmentsPath
 
     def __str__(self):
-        return f'\n\n{self.topic}\nTo: {self.to}\nFrom: {self.sender}\nBCC: {self.bcc}\nCC: {self.cc}\n{self.content}\n{self.attachmentsPath}\n'
+        return f'\n\n{self.subject}\nTo: {self.to}\nFrom: {self.sender}\nBCC: {self.bcc}\nCC: {self.cc}\n{self.content}\n{self.attachmentsPath}\n'
