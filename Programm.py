@@ -19,6 +19,7 @@ class Programm:
         self.MailManager.UserManager = self.UserManager
         self.UserManager.ContactsManager = self.ContactManager
         self.ContactManager.UserManager = self.UserManager
+        self.FolderManager.UserManager = self.UserManager
         
         self.setupUsers()
         self.setupMails()

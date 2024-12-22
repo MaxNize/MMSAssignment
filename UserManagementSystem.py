@@ -99,6 +99,7 @@ What do you want to do?
                     print("Folder already exists!")
                     return
                 self.active.folders.append(Folder(name))
+                return
             if (self.active.checkForExistingFolder(folderName)):
                 self.FolderManager.active = self.active.getFolder(folderName)
                 self.FolderManager.mainloop()
@@ -160,6 +161,32 @@ What do you want to do?
                 return
         print(self.TEXTnoUserWithUserNameAvailable(userName))
 
+    def setupFoldersQ(self):
+        self.TEXTheading("SETUP FOLDERS")
+
+        for i in self.active.folders:
+                print(i.name)
+
+        inbox = input("Enter the name of your Inbox: ")
+        if (not self.active.checkForExistingFolder(inbox)):
+            print("No Folder available")
+            return
+        outbox = input("Enter the name of your Outbox: ")
+        if (not self.active.checkForExistingFolder(outbox)):
+            print("No Folder available")
+            return
+        trash = input("Enter the name of your Trash: ")
+        if (not self.active.checkForExistingFolder(trash)):
+            print("No Folder available")
+            return
+        
+        self.setupFolders(inbox, outbox, trash)
+
+    def setupFolders(self, inbox, outbox, trash):
+        self.active.inbox = inbox
+        self.active.outbox = outbox
+        self.active.trash = trash
+
     def login(self, user, pw):
         if (user.checkPw(pw)):
             self.active = user
@@ -211,3 +238,5 @@ What do you want to do?
                     self.openFolder()
                 case 4:
                     self.contacts() 
+                case 5:
+                    self.setupFoldersQ()
