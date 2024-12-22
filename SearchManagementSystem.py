@@ -15,7 +15,8 @@ What do you want to search?
         self.active = False
         self.MailManager = False
         self.UserManager = False
-
+        
+#Mainfunction 1 allows the user to search the recieved mails by the sender 
     def searchBySender(self, senderString):
         matches = db.getMailsBySenderString("%"+senderString+"%", self.UserManager.active.userName)
 
@@ -38,6 +39,7 @@ What do you want to search?
             self.MailManager.mainloop()
             succes = True
 
+#Mainfunction 2 allows the user to search the recieved mails by subject 
     def searchBySubject(self, subjectString):
         matches = db.getMailsBySubjectString("%"+subjectString+"%", self.UserManager.active.userName)
 
@@ -61,6 +63,7 @@ What do you want to search?
             self.MailManager.mainloop()
             succes = True
 
+#Mainfunction 3 allows the user to search the recieved mails by attachments 
     def searchByAttachment(self, attachmentString):
         matches = db.getMailsByAttachmentString("%"+attachmentString+"%", self.UserManager.active.userName)
 
@@ -84,8 +87,7 @@ What do you want to search?
             succes
         
 
-
-
+#here are the switch case statments to execute the mainfunctions of this file
     def specificQuestionnaire(self, answer):
         match answer:
                 case 1:

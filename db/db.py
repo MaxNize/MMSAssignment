@@ -1,9 +1,11 @@
-import sqlite3
+#this file contains the structure of the database and how all mainpulations are inserted into thet database
+import sqlite3 # sqlite3 is used as the database 
 
 def initing():
     conn = sqlite3.connect('db/data.db')
     c = conn.cursor()
 
+#all tables that are used for the database 
     c.execute('''CREATE TABLE IF NOT EXISTS users (
 userName TEXT PRIMARY KEY,
 firstName TEXT,

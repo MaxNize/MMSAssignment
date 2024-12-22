@@ -1,8 +1,10 @@
+#This file is used to manage the various folders themselves 
 from System import System
 
 class FolderManagementSystem(System):
     def __init__(self):
         super().__init__()
+#Overview of the data in a specific folder
         self.title = "Folder : No Folder open"
         self.baseQuestion = '''
 What do you want to do?
@@ -38,7 +40,7 @@ What do you want to do?
         for i in self.active.mails:
             self.baseQuestion = self.baseQuestion+ str(j) + ": " + i.time + i.subject +  "\n"
             j += 1
-
+#Mainfunction 1  deletes a folder
     def deleteFolder(self):
         if (len(self.UserManager.active.folders) > 1):
             self.UserManager.active.folders.remove(self.active)

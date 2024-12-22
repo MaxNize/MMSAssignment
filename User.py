@@ -1,4 +1,5 @@
-import Folder
+#This file contains the User class its attributes and functions   
+import Folder #is needed to know which flders and mails the user has 
 
 class User:
     def __init__(self, userName, firstName, lastName, mail, pw, default):
@@ -16,11 +17,13 @@ class User:
         self.outbox = "Sent"
         self.trash = "Trash" 
 
+#is used to send a mail
     def sendMail(self, subject, to, sender, bcc, cc, content, attachmentsPath):
         for i in self.folders:
             if (i.name == self.outbox):
                 i.createMail(subject, to, sender, bcc, cc, content, attachmentsPath)
-            
+
+ # getter checking methodes          
     def getFolders(self):
         out = []
         for i in self.folders:

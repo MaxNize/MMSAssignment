@@ -2,7 +2,7 @@ from Folder import Folder
 from System import System
 from User import User
 import datetime
-import re
+
 
 class UserManagementSystem(System):
     def __init__(self):
@@ -53,6 +53,7 @@ What do you want to do?
 3: delete a User
 '''
             return
+#While logged into a user 
         self.baseQuestion = '''
 What do you want to do?
 0: STOP
@@ -227,6 +228,7 @@ What do you want to do?
     def initing(self):
         self.updateBasedOnActivity()
 
+#here are the switch case statments to execute the mainfunctions of this file
     def specificQuestionnaire(self, answer):
         if (not self.active):
             match answer:

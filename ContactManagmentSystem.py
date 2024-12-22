@@ -1,3 +1,4 @@
+#in this file everything concering contacts is handeled
 from System import System
 from Contact import Contact 
 
@@ -14,7 +15,7 @@ What do you want to do?
 3: edit Contact
 4: display Contacts
 '''     
-
+# Variables and functions used for cheking 
         self.UserManager = False
         self.active = False
         
@@ -27,7 +28,7 @@ What do you want to do?
     def TEXTnoUserWithUserContactAvailable(self, userName):
             return "No Contact with Username " + userName + " was found!"
         
-        
+#mainfunction 1 adds a contact to to the contact table
     def addNewContactQ(self):
         self.TEXTheading("ADD CONTACT")
         
@@ -41,7 +42,8 @@ What do you want to do?
         mail = input("What's the mail of your contact?: ")
         self.contacts.append(Contact(name, firstName, lastName, phoneNumber, mail, self.UserManager.active.userName))
         print(f"{name} was added to your contacts")
-        
+    
+    #mainfunction 2 delets a contact from the contact table
     def deleteConactQ(self):
         self.TEXTheading("DELETING CONTACT")
 
@@ -66,7 +68,8 @@ What do you want to do?
             if contact.name == name:
                 return contact
         return None
-
+    
+#mai function 3 gives the user the option to edit certain attributes of a chosen contact 
     def editContactQ(self):
         name = input("What's the name of the contact you want to change?: ")
         if (self.checkForExistingContactUsername(name)):
@@ -87,6 +90,7 @@ What do you want to do?
         contact.lastName = newLastName
         contact.phoneNumber = newPhoneNumber
   
+#mainfunction 4 outputs a list with all the names of the useres contacts 
     def updateBaseQuestion(self):
         print("Debug")
         if (not self.active or len(self.active.contacts) == 0 ):
@@ -114,7 +118,8 @@ What do you want to do?
     
     def initing(self):
         self.updateBasedOnActivity()
-            
+    
+    #here are the switch case statments to execute the mainfunctions of this file
     def specificQuestionnaire(self, answer):
         if (not self.active):
             match answer:

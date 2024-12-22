@@ -1,10 +1,12 @@
+#This file is used to manage all the Mails that a User has revicved
 from System import System
-import datetime
+import datetime #provides classes for working with dates and times
 
 class MailManagementSystem(System):
     def __init__(self):
         super().__init__()
         self.title = "MAIL"
+#Display of all the mainfunctions 
         self.baseQuestion = '''
 What do you want to do?
 0: Close Mail
@@ -15,7 +17,7 @@ What do you want to do?
 '''
         self.FolderManager = False
         self.UserManager = False
-
+#Mainfunction 1 allows the user to delete a selected  mail 
     def deleteMailQ(self):
         print("Do you really want to delete this Mail?")
         if (self.checkSafetyQuestion(input("(y/n) "))):
@@ -26,6 +28,7 @@ What do you want to do?
         self.active = False
         self.running = False
 
+#Mainfunction 2 allows the user to move a selected mail to antohter folder
     def moveMail(self, destination):
         if (destination == "CANCEL"):
             return True
@@ -43,6 +46,7 @@ What do you want to do?
             destination = input("Where do you want to move the Mail to? (CANCEL to cancel) ")
             worked = self.moveMail(destination)
 
+#Mainfunction 3 allows the user to answer a mail they received
     def answerMail(self, content, attachmentsPath):
         subject = "AW: " + self.active.subject
         content = content + "\n Original Message: " + self.active.content
@@ -61,7 +65,7 @@ What do you want to do?
             print("Mail sent!")
             return
         print("Canceled")
-
+#
     def updateBasedOnActivity(self):
         self.updadteBaseQuestion()
         self.updateTitle()
@@ -86,6 +90,7 @@ What do you want to do?
 
     def initing(self):
         self.updateBasedOnActivity()
+    #here are the switch case statments to execute the mainfunctions of this file
 
     def specificQuestionnaire(self, answer):
         match answer:
