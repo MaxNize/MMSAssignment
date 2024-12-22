@@ -12,9 +12,11 @@ What do you want to do?
 1: add new Contact
 2: delete Conatct 
 3: edit Contact
-'''
-        self.contacts = []
+4: display Contacts
+'''     
+
         self.UserManager = False
+        self.active = False
         
     def checkForExistingContactUsername(self, name):
             for i in self.contacts:
@@ -35,8 +37,9 @@ What do you want to do?
             return
         firstName = input("What's the firstname of your contact?: ")
         lastName = input("What's the lastname of your contact?: ")
+        phoneNumber =input("Please enter their phonenumber: ")
         mail = input("What's the mail of your contact?: ")
-        self.contacts.append(Contact(name, firstName, lastName, mail, self.UserManager.active.userName))
+        self.contacts.append(Contact(name, firstName, lastName, phoneNumber, mail, self.UserManager.active.userName))
         print(f"{name} was added to your contacts")
         
     def deleteConactQ(self):
@@ -70,30 +73,50 @@ What do you want to do?
             newName = input("How would you like to name this contact?: ")
             newFirstName = input("What's the firstname of your contact?: ")
             newLastName = input("What's the lastname of your contact?: ")
-
-            self.editContact(name, newName, newFirstName, newLastName)
+            newPhoneNumber = input("What's the phonenumebr of your contact?: ")
+            self.editContact(name, newName, newFirstName, newLastName, newPhoneNumber)
             print(f"{name} was changed to {newName}")
             return True
         print(f"{name} was not found in your contacts")
         return False
     
-    def editContact(self, name, newName, newFirstName, newLastName):
+    def editContact(self, name, newName, newFirstName, newLastName, newPhoneNumber):
         contact = self.getContact(name)
         contact.name = newName
         contact.firstName = newFirstName
         contact.lastName = newLastName
-        
+        contact.phoneNumber = newPhoneNumber
+  
+    def updateBaseQuestion(self):
+        print("Debug")
+        if (not self.active or len(self.active.contacts) == 0 ):
+            self.BaseQuestion = '''
+What do you want to do?
+0: Close contacts
+1: add new Contact
+2: delete Conatct 
+You currently have no Contacts 
+'''
+            return
+        self.baseQuestion = '''
+What do you want to do?
+0: Close contacts
+1: add new Contact
+2: delete Conatct 
+'''
+        j = 1
+        for i in self.active.contacts:
+            self.baseQuestion = self.baseQuestion+ str(j) + ": " +"name: "+i.name 
+            j += 1    
+            
+    def updateBasedOnActivity(self):
+        self.updateBaseQuestion()
+    
+    def initing(self):
+        self.updateBasedOnActivity()
             
     def specificQuestionnaire(self, answer):
         if (not self.active):
-            match answer:
-                case 1:
-                    self.addNewContactQ()
-                case 2:
-                    self.deleteConactQ()
-                case 3:
-                    self.editContactQ()
-        else:    
             match answer:
                 case 1:
                     self.logout()
@@ -101,4 +124,16 @@ What do you want to do?
                     self.writeMail()
                 case 3:
                     self.openFolder()
+                
+        else:    
+            match answer:
+               
+                case 1:
+                    self.addNewContactQ()
+                case 2:
+                    self.deleteConactQ()
+                case 3:
+                    self.editContactQ()
+                case 4: 
+                    self.displayContactsQ()
 

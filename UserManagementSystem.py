@@ -1,6 +1,7 @@
 from Folder import Folder
 from System import System
 from User import User
+import datetime
 import re
 
 class UserManagementSystem(System):
@@ -77,10 +78,11 @@ What do you want to do?
             cc = input("Enter Cc (or leave blank): ")
             content = input("Enter your mail (Dont hit enter unless your finished. For linebreaks use \\n): ")
             attachmentsPath = input("Enter filepath to your attachement in the attachements folder (PATH or leave blank): ")
-
+            time = datetime.datetime.now()
+            time = time.strftime("%Y-%m-%d %H:%M:%S")
             safety = input("Do you want to send the message? (y/n) ")
             if(self.checkSafetyQuestion(safety)):
-                self.active.sendMail(topic, to, self.active.mail, bcc, cc, content, attachmentsPath)
+                self.active.sendMail(topic, to, self.active.mail, bcc, cc, content, attachmentsPath, time)
                 print("The Mail has been added to your Outbox!")
         else:
             print("That's not an email!")
@@ -148,7 +150,7 @@ What do you want to do?
         if (self.checkForExistingUsername(userName)):
             print("ARE YOU SURE ABOUT THAT?")
             print("THIS WILL DELETE ALL YOUR DATA PERMANANTLY")
-            answer = input("y/n ")
+            answer = input("(y/n): ")
             if (self.checkSafetyQuestion(answer)):
                 pw = input(self.TEXTenterYourPw)
                 user = self.getUser(userName)
@@ -187,6 +189,7 @@ What do you want to do?
             return False
     
     def contacts(self):
+        self.ContactsManager.active = self.active
         self.ContactsManager.mainloop()
         
     def initing(self):

@@ -11,6 +11,7 @@ class User:
             self.folders = [Folder.Folder("Inbox"), Folder.Folder("Sent"), Folder.Folder("Trash")]
         else:
             self.folders = []
+        self.contacts = []
         self.inbox = "Recieved"
         self.outbox = "Sent"
         self.trash = "Trash" 

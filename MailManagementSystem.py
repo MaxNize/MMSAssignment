@@ -1,4 +1,5 @@
 from System import System
+import datetime
 
 class MailManagementSystem(System):
     def __init__(self):
@@ -17,7 +18,7 @@ What do you want to do?
 
     def deleteMailQ(self):
         print("Do you really want to delete this Mail?")
-        if (self.checkSafetyQuestion(input("y/n"))):
+        if (self.checkSafetyQuestion(input("(y/n) "))):
             self.deleteMail()
 
     def deleteMail(self):
@@ -52,9 +53,11 @@ What do you want to do?
     def answerMailQ(self):
         content = input("Enter your answer (Dont hit enter unless your finished. For linebreaks use \\n): ")
         attachmentsPath = input("Enter filepath to your attachement in the attachements folder (PATH or leave blank): ")
+        time = datetime.datetime.now()
+        time = time.strftime("%Y-%m-%d %H:%M:%S")
         safety = input("Do you want to send the message? (y/n) ")
         if(self.checkSafetyQuestion(safety)):
-            self.answerMail(content, attachmentsPath)
+            self.answerMail(content, attachmentsPath, time)
             print("Mail sent!")
             return
         print("Canceled")
@@ -68,9 +71,9 @@ What do you want to do?
 
         self.baseQuestion = self.baseQuestion + '''
 What do you want to do?
-0: Close Mail
-1: Delete Mail from Folder
-2: Move to different Folder
+0: Close mail
+1: Delete mail from folder
+2: Move to different folder
 3: Answer
 4: Forward
 '''
