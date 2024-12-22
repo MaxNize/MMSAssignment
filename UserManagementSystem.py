@@ -116,22 +116,25 @@ What do you want to do?
         self.TEXTheading("CREATE USER")
         
         while True:
-             userName = input(self.TEXTenterUserName)
-             firstName = input("Please enter a firstname: ")
-             lastName = input("Please enter a lastname: ")
-             mail = input("Please enter a mail: ") 
-             if not self.checkForMailpattern(mail):
-                 print("Invalid mail entered! Please try again.")
-                 continue
-             print("Your mail is valid")
-             pw = input("Please enter a Password: ")
-             pwTest = input("Please enter your verify your password: ")
-             if pwTest != pw:
-                 print("The entered passwords do not match! Please try again.")
-                 continue
-             self.createUser(userName, firstName, lastName, mail, pw)
-             print("User was successfully created!")
-             break
+            userName = input(self.TEXTenterUserName)
+            if (self.checkForExistingUsername(userName)):
+                print("Username already exists! Please try again.")
+                continue
+            firstName = input("Please enter a firstname: ")
+            lastName = input("Please enter a lastname: ")
+            mail = input("Please enter a mail: ") 
+            if not self.checkForMailpattern(mail):
+                print("Invalid mail entered! Please try again.")
+                continue
+            print("Your mail is valid")
+            pw = input("Please enter a Password: ")
+            pwTest = input("Please enter your verify your password: ")
+            if pwTest != pw:
+                print("The entered passwords do not match! Please try again.")
+                continue
+            self.createUser(userName, firstName, lastName, mail, pw)
+            print("User was successfully created!")
+            break
             
             
 
