@@ -36,7 +36,7 @@ What do you want to do?
 '''
         j = 2
         for i in self.active.mails:
-            self.baseQuestion = self.baseQuestion+ str(j) + ": " + i.time + i.subject +  "\n"
+            self.baseQuestion = self.baseQuestion+ str(j) + ": " + i.subject +  "\n"
             j += 1
 
     def deleteFolder(self):

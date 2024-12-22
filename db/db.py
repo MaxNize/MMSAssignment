@@ -125,8 +125,8 @@ def setMails(data):
 
     # Prepare the SQL INSERT statement
     sql = '''
-    INSERT INTO mails (subject, "to", sender, bcc, cc, content, attachmentsPath, folder, userName)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO mails (subject, "to", sender, bcc, cc, content, attachmentsPath, folder, userName, timestamp)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     '''
 
     # Prepare data as a list of tuples
@@ -140,7 +140,8 @@ def setMails(data):
             mail["content"],
             mail["attachmentsPath"],
             mail["folder"],
-            mail["userName"]
+            mail["userName"],
+            mail["timestamp"]
         )
         for mail in data
     ]
@@ -176,8 +177,8 @@ def setContacts(data):
 
     # Prepare the SQL INSERT statement
     sql = '''
-    INSERT INTO contacts (name, firstName, lastName, mail, userName)
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO contacts (name, firstName, lastName, mail, userName, phone)
+    VALUES (?, ?, ?, ?, ?, ?)
     '''
 
     # Prepare data as a list of tuples
@@ -187,7 +188,8 @@ def setContacts(data):
             contact["firstName"],
             contact["lastName"],
             contact["mail"],
-            contact["userName"]
+            contact["userName"],
+            contact["phone"]
         )
         for contact in data
     ]

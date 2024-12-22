@@ -16,10 +16,10 @@ class User:
         self.outbox = "Sent"
         self.trash = "Trash" 
 
-    def sendMail(self, subject, to, sender, bcc, cc, content, attachmentsPath):
+    def sendMail(self, subject, to, sender, bcc, cc, content, attachmentsPath, timestamp):
         for i in self.folders:
             if (i.name == self.outbox):
-                i.createMail(subject, to, sender, bcc, cc, content, attachmentsPath)
+                i.createMail(subject, to, sender, bcc, cc, content, attachmentsPath, timestamp)
             
     def getFolders(self):
         out = []
