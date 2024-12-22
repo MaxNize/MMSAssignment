@@ -47,11 +47,11 @@ What do you want to do?
             worked = self.moveMail(destination)
 
 #Mainfunction 3 allows the user to answer a mail they received
-    def answerMail(self, content, attachmentsPath):
+    def answerMail(self, content, attachmentsPath, time):
         subject = "AW: " + self.active.subject
         content = content + "\n Original Message: " + self.active.content
         attachmentsPath = self.active.attachmentsPath + attachmentsPath
-        self.UserManager.active.sendMail(subject, self.active.sender, self.UserManager.active.mail, self.active.bcc, self.active.cc, content, attachmentsPath)
+        self.UserManager.active.sendMail(subject, self.active.sender, self.UserManager.active.mail, self.active.bcc, self.active.cc, content, attachmentsPath, time)
 
 
     def answerMailQ(self):
