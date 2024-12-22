@@ -6,7 +6,7 @@ class User:
         self.firstName = firstName
         self.lastName = lastName
         self.mail = mail
-        self._pw = pw
+        self.__pw = pw
         if (default):
             self.folders = [Folder.Folder("Inbox"), Folder.Folder("Sent"), Folder.Folder("Trash")]
         else:
@@ -49,7 +49,7 @@ class User:
             return i.mails
         
     def checkPw(self, pw):
-        return pw == self._pw
+        return pw == self.__pw
     
     def getPw(self):
-        return self._pw
+        return self.__pw

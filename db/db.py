@@ -206,3 +206,33 @@ def deleteContacts():
 
     conn.commit()
     conn.close()
+
+def getMailsBySenderString(senderString, userName):
+    conn = sqlite3.connect('db/data.db')
+    c = conn.cursor()
+
+    c.execute('SELECT * FROM mails WHERE sender LIKE ? AND userName = ?', (senderString, userName))
+    mails = c.fetchall()
+
+    conn.close()
+    return mails
+
+def getMailsBySubjectString(subjectString, userName):
+    conn = sqlite3.connect('db/data.db')
+    c = conn.cursor()
+
+    c.execute('SELECT * FROM mails WHERE subject LIKE ? AND userName = ?', (subjectString, userName))
+    mails = c.fetchall()
+
+    conn.close()
+    return mails
+
+def getMailsByAttachmentString(contentString, userName):
+    conn = sqlite3.connect('db/data.db')
+    c = conn.cursor()
+
+    c.execute('SELECT * FROM mails WHERE content LIKE ? AND userName = ?', (contentString, userName))
+    mails = c.fetchall()
+
+    conn.close()
+    return mails

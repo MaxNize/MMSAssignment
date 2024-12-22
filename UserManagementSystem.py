@@ -18,6 +18,7 @@ What do you want to do?
         self.users = []
         self.FolderManager = False
         self.ContactsManager = False
+        self.SearchManager = False
 
 
     def checkForExistingUsername(self, userName):
@@ -59,6 +60,7 @@ What do you want to do?
 3: Open Folder
 4: Contacts
 5: Setup in, out and trash Folder
+6: Search for mails
 '''
 
     def updateBasedOnActivity(self):
@@ -206,6 +208,9 @@ What do you want to do?
         user.trash = trash
         self.users.append(user)
 
+    def searchMails(self):
+        self.SearchManager.mainloop()
+            
     def deleteUser(self, userName):
         try:
             self.users.remove(self.getUser(userName))
@@ -240,3 +245,5 @@ What do you want to do?
                     self.contacts() 
                 case 5:
                     self.setupFoldersQ()
+                case 6:
+                    self.searchMails()

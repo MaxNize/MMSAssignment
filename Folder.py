@@ -11,3 +11,9 @@ class Folder:
     def deleteMail(self, mailIndex):
         if (mailIndex < len(self.mails)):
             del self.mails[mailIndex]
+
+    def getMailBySubject(self, subject):
+        for i in self.mails:
+            if (i.subject == subject):
+                return i
+        return None
