@@ -1,5 +1,5 @@
 from Contact import Contact
-from ContactManagmentSystem import ContactManagementSystem
+from ContactManagementSystem import ContactManagementSystem
 import json
 from FolderManagementSystem import FolderManagementSystem
 from MailManagementSystem import MailManagementSystem
