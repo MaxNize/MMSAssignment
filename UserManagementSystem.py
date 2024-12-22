@@ -92,16 +92,9 @@ What do you want to do?
             for i in self.active.folders:
                 print(i.name)
             folderName = input("Which Folder do you want to open? ")
-            print("DEBUG: "+ folderName)
-            print("DEBUG: ", self.active.checkForExistingFolder(folderName))
-            print("DEBUG: ", self.active.getFolder(folderName))
             if (self.active.checkForExistingFolder(folderName)):
                 self.FolderManager.active = self.active.getFolder(folderName)
-                print("DEBUG: ", self.active)
-                print("DEBUG: ", self.FolderManager.active)
-                print("DEBUG: before mainloop")
                 self.FolderManager.mainloop()
-                print("DEBUG: after mainloop")
                 success = True
             else:
                 print("No Folder with that name available!")
