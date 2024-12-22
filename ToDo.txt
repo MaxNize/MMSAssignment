@@ -19,14 +19,10 @@ ToDo Max:
 -inProgress
 
 -Testing
---MMS.mainloop.openFolder
----forward
----delete mail
----move to folder
----answer
---MMS.createUser: validate pw
---unvalid -> invalid
---two times pw entering needed
+-
+---forward (Funtion be found)
+
+---answer (is working but every Message is sent to "Sent" and not to Inbox / in Sent messages should only be the message that you sent)
 
 -Done
 --MMS.createUser
@@ -34,6 +30,12 @@ ToDo Max:
 --MMS.askForActionsLogin.logout
 --MMS.mainloop.writeMail
 --MMS.createUser: validate mail -> RegEx
+--MMS.createUser: validate pw
+--unvalid -> invalid
+--two times pw entering needed
+---delete mail
+---move to folder
+-MMS.mainloop.openFolder
 
 
 
