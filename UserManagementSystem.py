@@ -86,7 +86,7 @@ What do you want to do?
             time = time.strftime("%Y-%m-%d %H:%M:%S")
             safety = input("Do you want to send the message? (y/n) ")
             if(self.checkSafetyQuestion(safety)):
-                self.active.sendMail(subject, to, self.active.mail, bcc, cc, content, attachmentsPath)
+                self.active.sendMail(subject, to, self.active.mail, bcc, cc, content, attachmentsPath, time)
                 print("The Mail has been added to your Outbox!")
         else:
             print("That's not an email!")

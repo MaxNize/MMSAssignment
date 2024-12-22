@@ -1,6 +1,6 @@
 #This file contains the Mail class with its attributes  
 class Mail:
-    def __init__(self, subject, to, sender, bcc, cc, content, attachmentsPath) -> None:
+    def __init__(self, subject, to, sender, bcc, cc, content, attachmentsPath, timestamp) -> None:
         self.subject = subject
         self.to = to
         self.sender = sender
@@ -8,6 +8,7 @@ class Mail:
         self.cc = cc
         self.content = content
         self.attachmentsPath = attachmentsPath
+        self.timestamp = timestamp
 
 #Defines a readable string representation of the Mail object, showing its main attributes.
     def __str__(self):

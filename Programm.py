@@ -1,3 +1,4 @@
+from Contact import Contact
 from ContactManagmentSystem import ContactManagementSystem
 import json
 from FolderManagementSystem import FolderManagementSystem
@@ -28,6 +29,7 @@ class Programm:
         
         self.setupUsers()
         self.setupMails()
+        self.setupContacts()
 
     def mainloop(self):
         self.UserManager.mainloop()
@@ -36,17 +38,21 @@ class Programm:
     def save(self):
         dataUsers = []
         dataMails = []
+        dataContacts = []
         for i in self.UserManager.users:
             dataUsers.append({"userName": i.userName, "firstName": i.firstName, "lastName": i.lastName, "mail": i.mail, "pw": i.getPw(), "folders": i.getFoldersForSave(), "inbox": i.inbox, "outbox": i.outbox, "trash": i.trash})
-            print("DEBUG: " , i.folders)
             for j in i.folders:
                 for k in j.mails:
-                    dataMails.append({"subject": k.subject, "to": k.to, "sender": k.sender, "bcc": k.bcc, "cc": k.cc, "content": k.content, "attachmentsPath": k.attachmentsPath, "folder": j.name, "userName": i.userName})
+                    dataMails.append({"subject": k.subject, "to": k.to, "sender": k.sender, "bcc": k.bcc, "cc": k.cc, "content": k.content, "attachmentsPath": k.attachmentsPath, "folder": j.name, "userName": i.userName, "timestamp": k.timestamp})
+            for l in i.contacts:
+                dataContacts.append({"name": l.name, "firstName": l.firstName, "lastName": l.lastName, "mail": l.mail, "userName": l.userName, "phone": l.phone})
 
         db.deleteUsers()
         db.setUsers(dataUsers)
         db.deleteMails()
         db.setMails(dataMails)
+        db.deleteContacts()
+        db.setContacts(dataContacts)
             
 
     def setupUsers(self):
@@ -57,5 +63,9 @@ class Programm:
     def setupMails(self):
         data = db.getMails()
         for i in data:
-            print(i[8])
-            self.UserManager.getUser(i[9]).getFolder(i[8]).createMail(i[1], i[2], i[3], i[4], i[5], i[6], i[7])
+            self.UserManager.getUser(i[9]).getFolder(i[8]).createMail(i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[10])
+
+    def setupContacts(self):
+        data = db.getContacts()
+        for i in data:
+            self.UserManager.getUser(i[4]).contacts.append(Contact(i[0], i[1], i[2], i[3], i[4], i[5]))

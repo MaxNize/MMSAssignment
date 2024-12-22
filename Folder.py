@@ -6,8 +6,8 @@ class Folder:
         self.mails = []
 
 #functions 
-    def createMail(self, subject, to, sender, bcc, cc, content, attachmentsPath):
-        self.mails.append(Mail.Mail(subject, to, sender, bcc, cc, content, attachmentsPath))
+    def createMail(self, subject, to, sender, bcc, cc, content, attachmentsPath, timestamp):
+        self.mails.append(Mail.Mail(subject, to, sender, bcc, cc, content, attachmentsPath, timestamp))
 
     def deleteMail(self, mailIndex):
         if (mailIndex < len(self.mails)):
