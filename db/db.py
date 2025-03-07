@@ -53,6 +53,12 @@ commissionRate FLOAT);
 ''')
     
     c.execute('''CREATE TABLE IF NOT EXISTS salesAndHours (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+employeeId INTEGER,
+date TEXT,
+sales FLOAT,
+hoursWorked FLOAT,
+FOREIGN KEY (employeeId) REFERENCES employeeInfo(id));
 ''')
 
     conn.commit()
