@@ -1,17 +1,90 @@
 Backlog:
--MMS.askForActionsLogin
--input safety
--folder loop
--Mail: TimeStamp
--I want to go back from every action at
-    any time
--DB-Anbindung
--Contacts
+-Documentation
+#-Class Diagramm
+#-Comments
+#-description in word
+
+-Employees Information mgmt
+#-create employee
++|-enter name
++|-enter birthdate
++|-enter role
++|-enter mail
+++|-validate
++|-enter type (fulltime, parttime)
++|-enter base_salary
++|-enter comission_rate
++|-set employee_ID automatically
+#-edit employee
++|-call employee
++|-edit name
++|-edit birthdate
++|-edit role
++|-edit mail
+++|-validate
++|-edit type (fulltime, parttime)
++|-edit base_salary
++|-edit comission_rate
+#-read data
++|-read data of all employees in a nice format (show employee ID, name, birthdate, role, mail, type, base_salary, comission_rate)
++|-read data of an employee by name in a nice format -> means searching or listing employee names and pressing number (show employee ID, name, birthdate, role, mail, type, base_salary, comission_rate)
+#-delete data
++|-delete data of an employee
+++|-ask if this task should really be performed
++|-the id should not be given to a new employee again
+
+
+-Payrole System
+#-init
++|-is called when ma is created
++|-enter hourly_rate
+#-Process: time mgmt
++|-enter time_worked for a date for an employee
+++|-check if date already exists
+++|-check if amount is valid
+#-Process: sales mgmt
++|-enter a sale for a date for an employee
+++|-check if date already exists
+++|-check if amount is valid
+#-Edit payroll info
++|-edit sales
+++|-check if date already exists
+++|-check if amount is valid
++|-edit time_worked
+++|-check if date already exists
+++|-check if amount is valid
+#-Print payroll info
++|-print time_worked for an employee per date
++|-print sales for an employee per date
+#-Process: Generate Payslip
++|-specify time range
++|-create file with:
+++|-employee info (ID, name, birthdate, role, mail, type, base_salary, comission_rate)
+++|-per date list:
++++|-time_worked
++++|-base_salary per hour
++++|-sales
++++|-comission_rate
++++|-calculate the salary for that day (time_worked * base_salary)
++++|-calculate the comission for that day (sales * comission_rate)
+++|-sum the salaries
+++|-sum the comissions
+++|-total up
+++|-"send as mail"
+
+-Logging
+#-write every action to db with timestamp and error if needed
+
+Comments to the Backlog:
+~First do the DataDesign and the DB changes
+~Then do the printing. keep editing and searching in mind
+~fill the db with testdata to test your printing
+~then do entering, editing, deleting
+
+
 
 BUGS:
--little more spacing between prompts could be nice
--entering not a number crashes
--if answered mail: Layout is fucked
+
 
 ToDo Max:
 -ToDo
@@ -19,25 +92,8 @@ ToDo Max:
 -inProgress
 
 -Testing
--
----forward (Funtion not found)
-
----answer (is working but every Message is sent to "Sent" and not to Inbox / in Sent messages should only be the message that you sent)
 
 -Done
---MMS.createUser
---MMS.logIntoUser
---MMS.askForActionsLogin.logout
---MMS.mainloop.writeMail
---MMS.createUser: validate mail -> RegEx
---MMS.createUser: validate pw
---unvalid -> invalid
---two times pw entering needed
----delete mail
----move to folder
--MMS.mainloop.openFolder
-
 
 
 ToDo Dimi:
---MMS.createUser: check if user exists
