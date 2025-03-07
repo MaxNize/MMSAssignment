@@ -40,6 +40,20 @@ userName Text,
 phone Text,
 FOREIGN KEY (userName) REFERENCES users(userName));
               ''')
+    
+    c.execute('''CREATE TABLE IF NOT EXISTS employeeInfo (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT,
+birthdate TEXT,
+role TEXT,
+mail TEXT,
+type TEXT,
+baseSalary FLOAT,
+commissionRate FLOAT);
+''')
+    
+    c.execute('''CREATE TABLE IF NOT EXISTS salesAndHours (
+''')
 
     conn.commit()
     conn.close()

@@ -87,13 +87,14 @@ BUGS:
 
 
 ToDo Max:
--ToDo
+#ToDo
+-editing DB for ma info
 
--inProgress
+#inProgress
 
--Testing
+#Testing
 
--Done
+#Done
 
 
 ToDo Dimi:
