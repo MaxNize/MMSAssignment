@@ -80,6 +80,7 @@ Comments to the Backlog:
 ~Then do the printing. keep editing and searching in mind
 ~fill the db with testdata to test your printing
 ~then do entering, editing, deleting
+~deleting maInfo is just nulling every field so we can still store the last MAID
 
 
 
@@ -90,11 +91,13 @@ ToDo Max:
 #ToDo
 
 #inProgress
+-creating employee mgmt system
+--create employee
 
 #Testing
 
 #Done
--editing DB for ma info and payroll info
+-editing DB for ma info and payroll info and logging
 -adding testData
 
 ToDo Dimi:

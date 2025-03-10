@@ -6,6 +6,7 @@ class System:
         self.TEXTdivider = "********************************"
         self.TEXTspacer = "\n\n\n\n\n\n\n\n\n\n"
         self.emailPattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+        self.datePattern = r"(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0,1,2])\/(19|20)\d{2}"
         self.TEXTenterUserName = "Please enter a Username: "
         self.TEXTenterYourPw = "Please enter your Password: "
         #These are the vars every System needs
@@ -26,6 +27,45 @@ class System:
                         return out
                     except ValueError:
                         print("Input must be an Integer")
+            case "date":
+                while (True):
+                    out = input(text)
+                    if re.match(self.datePattern, out):
+                        return out
+                    else:
+                        print("Invalid date format! Please try again.")
+            case "mail":
+                while (True):
+                    out = input(text)
+                    if self.checkForMailpattern(out):
+                        return out
+                    else:
+                        print("Invalid mail format! Please try again.")
+            case "hourType":
+                while (True):
+                    out = input(text)
+                    if (out == "fulltime" or out == "parttime"):
+                        return out
+                    else:
+                        print("Invalid hourType! Please try again.")
+            case "float":
+                while (True):
+                    try:
+                        out = float(input(text))
+                        return out
+                    except ValueError:
+                        print("Input must be a float")
+
+            case "decimalPercentage":
+                while (True):
+                    try:
+                        out = float(input(text))
+                        if (out >= 0 and out <= 1):
+                            return out
+                        else:
+                            print("Input must be a decimal between 0 and 1")
+                    except ValueError:
+                        print("Input must be a decimal")
             
     def TEXTheading(self, text):
         print(self.TEXTdivider)
@@ -36,6 +76,7 @@ class System:
         if (input == "y" or input == "Y" or input == "yes" or input == "Yes"):
             return True
         return False
+
     
     def initing(self):
         pass
