@@ -60,6 +60,12 @@ sales FLOAT,
 hoursWorked FLOAT,
 FOREIGN KEY (employeeId) REFERENCES employeeInfo(id));
 ''')
+    
+    c.execute('''CREATE TABLE IF NOT EXISTS log (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+action TEXT
+);''')
 
     conn.commit()
     conn.close()
