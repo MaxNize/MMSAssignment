@@ -5,33 +5,32 @@ Backlog:
 #-description in word
 
 -Employees Information mgmt
-#-create employee
-+|-enter name
-+|-enter birthdate
-+|-enter role
-+|-enter mail
-++|-validate
-+|-enter type (fulltime, parttime)
-+|-enter base_salary
-+|-enter comission_rate
-+|-set employee_ID automatically
-#-edit employee
-+|-call employee
-+|-edit name
-+|-edit birthdate
-+|-edit role
-+|-edit mail
-++|-validate
-+|-edit type (fulltime, parttime)
-+|-edit base_salary
-+|-edit comission_rate
-#-read data
+#-create employee %
++|-enter name %
++|-enter birthdate %
++|-enter role %
++|-enter mail %
+++|-validate %
++|-enter type (fulltime, parttime) %
++|-enter base_salary %
++|-enter comission_rate %
++|-set employee_ID automatically %
+#-edit employee %
++|-call employee %
++|-edit name %
++|-edit birthdate %
++|-edit role %
++|-edit mail %
+++|-validate %
++|-edit type (fulltime, parttime) %
++|-edit base_salary %
++|-edit comission_rate %
+#-read data %
 +|-read data of all employees in a nice format (show employee ID, name, birthdate, role, mail, type, base_salary, comission_rate)
-+|-read data of an employee by name in a nice format -> means searching or listing employee names and pressing number (show employee ID, name, birthdate, role, mail, type, base_salary, comission_rate)
 #-delete data
-+|-delete data of an employee
-++|-ask if this task should really be performed
-+|-the id should not be given to a new employee again
++|-delete data of an employee %
+++|-ask if this task should really be performed %
++|-the id should not be given to a new employee again %
 
 
 -Payrole System

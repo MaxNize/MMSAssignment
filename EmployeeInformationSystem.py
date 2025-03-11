@@ -20,7 +20,7 @@ What do you want to do?
     def addNewEmployeeQ(self):
         self.TEXTheading("ADD EMPLOYEE")
         name = input("Name your Employee: ")
-        birthdate = self.safeQuestion("What's the birthdate of your Employee?: ", "string")
+        birthdate = self.safeQuestion("What's the birthdate of your Employee?: ", "date")
         mail = self.safeQuestion("What's the mail of your Employee?: ", "mail")
         role = input("What's the role of your Employee?: ")
         hoursType = self.safeQuestion("What's the hoursType of your Employee?: ", "hourType")
@@ -34,15 +34,19 @@ What do you want to do?
         match mode:
             case "all":
                 for i in self.employees:
+                    if i.name == None:
+                        continue
                     print(i)
             case "edit":
                 for i in self.employees:
+                    if i.name == None:
+                        continue
                     print(i)
                 id = self.safeQuestion("Which employee do you want to edit? ", "int")
                 for i in self.employees:
                     if i.id == id:
                         i.name = input("Name your Employee: ")
-                        i.birthdate = self.safeQuestion("What's the birthdate of your Employee?: ", "string")
+                        i.birthdate = self.safeQuestion("What's the birthdate of your Employee?: ", "date")
                         i.mail = self.safeQuestion("What's the mail of your Employee?: ", "mail")
                         i.role = input("What's the role of your Employee?: ")
                         i.hoursType = self.safeQuestion("What's the hoursType of your Employee?: ", "hourType")
@@ -56,12 +60,19 @@ What do you want to do?
                 for i in self.employees:
                     print(i)
                 id = self.safeQuestion("Which employee do you want to delete? ", "int")
-                for i in self.employees:
-                    if i.id == id:
-                        self.employees.remove(i)
-                        print("Employee was deleted")
-                        return
-                print("No Employee with that ID was found!")
+                if self.checkSafetyQuestion(self, input("ARE YOU SURE? THIS WILL DELETE DATA PERMANANTLY (y/Y)")):
+                    for i in self.employees:
+                        if i.id == id:
+                            i.name = None
+                            i.birthdate = None
+                            i.role = None
+                            i.hoursType = None
+                            i.baseSalary = None
+                            i.comissionRate = None
+                            i.mail = None
+                            print("Employee was deleted")
+                            return
+                    print("No Employee with that ID was found!")
 
 
 

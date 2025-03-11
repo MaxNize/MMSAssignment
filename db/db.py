@@ -311,7 +311,7 @@ def setEmployees(data):
 
     # Prepare the SQL INSERT statement
     sql = '''
-    INSERT INTO employeeInfo (id, name, birthdate, role, mail, hoursType, baseSalary, comissionRate)
+    INSERT INTO employeeInfo (id, name, birthdate, role, mail, type, baseSalary, commissionRate)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     '''
 

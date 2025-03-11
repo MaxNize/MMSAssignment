@@ -6,7 +6,7 @@ class System:
         self.TEXTdivider = "********************************"
         self.TEXTspacer = "\n\n\n\n\n\n\n\n\n\n"
         self.emailPattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
-        self.datePattern = r"(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0,1,2])\/(19|20)\d{2}"
+        self.datePattern = r"(0[1-9]|[12][0-9]|3[01])\.(0[1-9]|1[0,1,2])\.(19|20)\d{2}"
         self.TEXTenterUserName = "Please enter a Username: "
         self.TEXTenterYourPw = "Please enter your Password: "
         #These are the vars every System needs
@@ -33,7 +33,7 @@ class System:
                     if re.match(self.datePattern, out):
                         return out
                     else:
-                        print("Invalid date format! Please try again.")
+                        print("Invalid date format! Please try again. (DD.MM.YYYY)")
             case "mail":
                 while (True):
                     out = input(text)
@@ -47,7 +47,7 @@ class System:
                     if (out == "fulltime" or out == "parttime"):
                         return out
                     else:
-                        print("Invalid hourType! Please try again.")
+                        print("Invalid hourType! Please try again. (must be fulltime or parttime)")
             case "float":
                 while (True):
                     try:
