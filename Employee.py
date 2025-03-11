@@ -8,3 +8,6 @@ class Employee:
         self.hoursType = hoursType
         self.baseSalary = baseSalary
         self.comissionRate = comissionRate
+
+    def __str__(self):
+        return f"{self.id}: {self.name}, {self.birthdate}, {self.role}, {self.mail}, {self.hoursType}, {self.baseSalary}, {self.comissionRate}"

@@ -11,7 +11,7 @@ class UserManagementSystem(System):
         self.title = "MENU : No User logged in"
         self.baseQuestion = '''
 What do you want to do?
-0: STOP
+0: return to menu
 1: create a new User
 2: log into a User
 3: delete a User
@@ -47,7 +47,7 @@ What do you want to do?
         if (not self.active):
             self.baseQuestion = '''
 What do you want to do?
-0: STOP
+0: return to Menu
 1: create a new User
 2: log into a User
 3: delete a User

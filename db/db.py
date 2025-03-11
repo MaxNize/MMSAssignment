@@ -266,3 +266,72 @@ def getMailsByAttachmentString(contentString, userName):
 
     conn.close()
     return mails
+
+def logAction(action):
+    conn = sqlite3.connect('db/data.db')
+    c = conn.cursor()
+
+    c.execute('INSERT INTO log (action) VALUES (?)', (action,))
+
+    conn.commit()
+    conn.close()
+
+def getLastEmployeeID():
+    conn = sqlite3.connect('db/data.db')
+    c = conn.cursor()
+
+    c.execute('SELECT id FROM employeeInfo ORDER BY id DESC LIMIT 1;')
+    out = c.fetchall()
+
+    conn.close()
+    return out[0][0]
+
+def getEmployees():
+    conn = sqlite3.connect('db/data.db')
+    c = conn.cursor()
+
+    c.execute('SELECT * FROM employeeInfo')
+    out = c.fetchall()
+
+    conn.close()
+    return out
+
+def deleteEmployees():
+    conn = sqlite3.connect('db/data.db')
+    c = conn.cursor()
+
+    c.execute('DELETE FROM employeeInfo')
+
+    conn.commit()
+    conn.close()
+
+def setEmployees(data):
+    conn = sqlite3.connect('db/data.db')
+    c = conn.cursor()
+
+    # Prepare the SQL INSERT statement
+    sql = '''
+    INSERT INTO employeeInfo (id, name, birthdate, role, mail, hoursType, baseSalary, comissionRate)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    '''
+
+    # Prepare data as a list of tuples
+    values = [
+        (
+            employee["id"],
+            employee["name"],
+            employee["birthdate"],
+            employee["role"],
+            employee["mail"],
+            employee["hoursType"],
+            employee["baseSalary"],
+            employee["comissionRate"]
+        )
+        for employee in data
+    ]
+
+    # Use executemany to insert all records
+    c.executemany(sql, values)
+
+    conn.commit()
+    conn.close()

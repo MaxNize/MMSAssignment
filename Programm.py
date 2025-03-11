@@ -1,8 +1,12 @@
+from AccountingSystem import AccountingSystem
 from Contact import Contact
 from ContactManagementSystem import ContactManagementSystem
 import json
+from Employee import Employee
+from EmployeeInformationSystem import EmployeeInformationSystem
 from FolderManagementSystem import FolderManagementSystem
 from MailManagementSystem import MailManagementSystem
+from MenuSystem import MenuSystem
 from SearchManagementSystem import SearchManagementSystem
 from UserManagementSystem import UserManagementSystem
 from db import db
@@ -15,6 +19,8 @@ class Programm:
         self.FolderManager = FolderManagementSystem()
         self.ContactManager = ContactManagementSystem()
         self.SearchManager = SearchManagementSystem()
+        self.EmployeeManager = EmployeeInformationSystem(db.getLastEmployeeID())
+        self.AccountingManager = AccountingSystem()
         
         self.UserManager.FolderManager = self.FolderManager
         self.FolderManager.MailManager = self.MailManager
@@ -30,15 +36,19 @@ class Programm:
         self.setupUsers()
         self.setupMails()
         self.setupContacts()
+        self.setupEmployees()
+
+        self.MenuManager = MenuSystem(self.AccountingManager, self.UserManager, self.EmployeeManager)
 
     def mainloop(self):
-        self.UserManager.mainloop()
+        self.MenuManager.mainloop()
         self.save()
 
     def save(self):
         dataUsers = []
         dataMails = []
         dataContacts = []
+        dataEmployees = []
         for i in self.UserManager.users:
             dataUsers.append({"userName": i.userName, "firstName": i.firstName, "lastName": i.lastName, "mail": i.mail, "pw": i.getPw(), "folders": i.getFoldersForSave(), "inbox": i.inbox, "outbox": i.outbox, "trash": i.trash})
             for j in i.folders:
@@ -47,12 +57,17 @@ class Programm:
             for l in i.contacts:
                 dataContacts.append({"name": l.name, "firstName": l.firstName, "lastName": l.lastName, "mail": l.mail, "userName": l.userName, "phone": l.phone})
 
+        for i in self.EmployeeManager.employees:
+            dataEmployees.append({"id": i.id, "name": i.name, "birthdate": i.birthdate, "role": i.role, "mail": i.mail, "hoursType": i.hoursType, "baseSalary": i.baseSalary, "comissionRate": i.comissionRate})
+
         db.deleteUsers()
         db.setUsers(dataUsers)
         db.deleteMails()
         db.setMails(dataMails)
         db.deleteContacts()
         db.setContacts(dataContacts)
+        db.deleteEmployees()
+        db.setEmployees(dataEmployees)
             
 
     def setupUsers(self):
@@ -69,3 +84,8 @@ class Programm:
         data = db.getContacts()
         for i in data:
             self.UserManager.getUser(i[4]).contacts.append(Contact(i[0], i[1], i[2], i[3], i[4], i[5]))
+
+    def setupEmployees(self):
+        data = db.getEmployees()
+        for i in data:
+            self.EmployeeManager.employees.append(Employee(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7]))
