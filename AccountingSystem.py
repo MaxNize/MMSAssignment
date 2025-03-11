@@ -8,4 +8,7 @@ class AccountingSystem(System):
         self.baseQuestion = '''
 What do you want to do?
 0: return to menu
+1: enter time worked
+2: enter a sale
+3:
 '''

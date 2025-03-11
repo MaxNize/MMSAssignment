@@ -335,3 +335,50 @@ def setEmployees(data):
 
     conn.commit()
     conn.close()
+
+def getHoursAndSales():
+    conn = sqlite3.connect('db/data.db')
+    c = conn.cursor()
+
+    c.execute('SELECT * FROM salesAndHours')
+    out = c.fetchall()
+
+    conn.close()
+    return out
+
+def deleteHoursAndSales():
+    conn = sqlite3.connect('db/data.db')
+    c = conn.cursor()
+
+    c.execute('DELETE FROM salesAndHours')
+
+    conn.commit()
+    conn.close()
+
+def setHoursAndSales(data):
+    conn = sqlite3.connect('db/data.db')
+    c = conn.cursor()
+
+    # Prepare the SQL INSERT statement
+    sql = '''
+    INSERT INTO salesAndHours (id,employeeId,date,sales,hoursWorked)
+    VALUES (?, ?, ?, ?, ?)
+    '''
+
+    # Prepare data as a list of tuples
+    values = [
+        (
+            entry["id"],
+            entry["employeeId"],
+            entry["date"],
+            entry["sales"],
+            entry["hoursWorked"]
+        )
+        for entry in data
+    ]
+
+    # Use executemany to insert all records
+    c.executemany(sql, values)
+
+    conn.commit()
+    conn.close()

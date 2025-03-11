@@ -5,6 +5,7 @@ import json
 from Employee import Employee
 from EmployeeInformationSystem import EmployeeInformationSystem
 from FolderManagementSystem import FolderManagementSystem
+from HoursAndSales import HoursAndSales
 from MailManagementSystem import MailManagementSystem
 from MenuSystem import MenuSystem
 from SearchManagementSystem import SearchManagementSystem
@@ -37,6 +38,7 @@ class Programm:
         self.setupMails()
         self.setupContacts()
         self.setupEmployees()
+        self.setupHoursAndSales()
 
         self.MenuManager = MenuSystem(self.AccountingManager, self.UserManager, self.EmployeeManager)
 
@@ -49,6 +51,7 @@ class Programm:
         dataMails = []
         dataContacts = []
         dataEmployees = []
+        dataHoursAndSales = []
         for i in self.UserManager.users:
             dataUsers.append({"userName": i.userName, "firstName": i.firstName, "lastName": i.lastName, "mail": i.mail, "pw": i.getPw(), "folders": i.getFoldersForSave(), "inbox": i.inbox, "outbox": i.outbox, "trash": i.trash})
             for j in i.folders:
@@ -60,6 +63,9 @@ class Programm:
         for i in self.EmployeeManager.employees:
             dataEmployees.append({"id": i.id, "name": i.name, "birthdate": i.birthdate, "role": i.role, "mail": i.mail, "hoursType": i.hoursType, "baseSalary": i.baseSalary, "comissionRate": i.comissionRate})
 
+        for i in self.EmployeeManager.hoursSales:
+            dataHoursAndSales.append({"id": i.id, "employeeId": i.employeeId, "date": i.date, "sales": i.sales, "hoursWorked": i.hoursWorked})
+
         db.deleteUsers()
         db.setUsers(dataUsers)
         db.deleteMails()
@@ -68,6 +74,8 @@ class Programm:
         db.setContacts(dataContacts)
         db.deleteEmployees()
         db.setEmployees(dataEmployees)
+        db.deleteHoursAndSales()
+        db.setHoursAndSales(dataHoursAndSales)
             
 
     def setupUsers(self):
@@ -89,3 +97,8 @@ class Programm:
         data = db.getEmployees()
         for i in data:
             self.EmployeeManager.employees.append(Employee(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7]))
+
+    def setupHoursAndSales(self):
+        data = db.getHoursAndSales()
+        for i in data:
+            self.EmployeeManager.hoursSales.append(HoursAndSales(i[0], i[1], i[2], i[3], i[4]))
