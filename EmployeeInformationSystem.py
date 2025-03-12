@@ -2,6 +2,8 @@ from Employee import Employee
 from HoursAndSales import HoursAndSales
 from System import System
 import logging
+from datetime import datetime
+import FileHandling
 
 class EmployeeInformationSystem(System):
     def __init__(self, lastId):
@@ -18,11 +20,13 @@ What do you want to do?
 5: add hours and sales
 6: edit hours and sales
 7: print hours and sales
-8: send payslip
+8: send payslips
 '''
         self.employees = []
         self.lastId = lastId
         self.hoursSales = []
+        self.dateFormat = "%d.%m.%Y"
+        self.UserManager = False
 
     @logging.logger
     def addNewEmployeeQ(self):
@@ -70,6 +74,8 @@ What do you want to do?
                 return "EDIT EMPLOYEE BUT GIVEN ID WAS NOT FOUND"
             case "delete":
                 for i in self.employees:
+                    if i.name == None:
+                        continue
                     print(i)
                 id = self.safeQuestion("Which employee do you want to delete? ", "int")
                 if self.checkSafetyQuestion(input("ARE YOU SURE? THIS WILL DELETE DATA PERMANANTLY (y/Y)")):
@@ -83,7 +89,7 @@ What do you want to do?
                             i.comissionRate = None
                             i.mail = None
                             print("Employee was deleted")
-                            return "DELETE EMPLOYEE WITH ID: ", i.id
+                            return "DELETE EMPLOYEE WITH ID: " + str(i.id)
                     print("No Employee with that ID was found!")
                     return "DELETE EMPLOYEE BUT GIVEN ID WAS NOT FOUND"
             case "addHoursSales":
@@ -106,6 +112,8 @@ What do you want to do?
                 
             case "editHoursSales":
                 for i in self.hoursSales:
+                    if list(filter(lambda x: x.id == i.employeeId, self.employees))[0].name == None:
+                        continue
                     print(i)
                 id = self.safeQuestion("Which Entry do you want to edit?: ", "int")
                 for i in self.hoursSales:
@@ -117,9 +125,52 @@ What do you want to do?
                 print("No Entry with that ID was found!")
                 return "EDIT HOURS AND SALES BUT GIVEN ID WAS NOT FOUND"
             
-            case printHoursSales:
+            case "printHoursSales":
                 for i in self.hoursSales:
                     print(i)
+                return "PRINT ALL HOURS AND SALES"
+            case "sendPayslip":
+                start = self.safeQuestion("Enter StartDate: ", "date")
+                end = self.safeQuestion("Enter enddate: ", "date")
+                startDate = datetime.strptime(start, self.dateFormat)
+                endDate = datetime.strptime(end, self.dateFormat)
+
+                availableData = []
+                for i in self.hoursSales:
+                    for j in self.employees:
+                        if i.employeeId == j.id:
+                            if j.name == None:
+                                continue
+                            availableData.append(i)
+
+                dataInRange = list(filter(lambda date: startDate <= datetime.strptime(date.date, self.dateFormat) <= endDate, availableData))
+                employeeIDs = set(map(lambda data: data.employeeId, dataInRange))
+                dataSets = []
+                for i in employeeIDs:
+                    dataSets.append(list(filter(lambda date: date.employeeId == i, dataInRange)))
+
+                for i in dataSets:
+                    sortedData = sorted(i, key=lambda entry: datetime.strptime(entry.date, self.dateFormat))
+                    employee = list(filter(lambda employee: employee.id == i[0].employeeId, self.employees))
+
+                    self.sendPayslip(sortedData, employee)
+                return "SEND PAYSLIPS FOR ENTRIES IN RANGE " + start + " - " + end
+
+    @logging.logger
+    def sendPayslip(self, data, employee):
+        file = FileHandling.createPayslip(data, employee[0])
+        self.mailPayslip(file, employee[0])
+
+        return "CREATE PAYSLIP FOR EMPLOYEE " + employee[0].name
+    
+    @logging.logger
+    def mailPayslip(self, file, employee):
+        self.UserManager.login(self.UserManager.getUser("Accounting"), "company_Accounting")
+        time = datetime.now()
+        time = time.strftime("%Y-%m-%d %H:%M:%S")
+        self.UserManager.active.sendMail("Your Payslip", employee.mail, self.UserManager.active.mail, "", "", "Dear " + employee.name + ", \n with this mail we send you your payslip (attachments). \n kind regards, \n your accounting team", file, time)
+        self.UserManager.logout()
+        return "MAIL PAYSLIP TO EMPLOYEE " + employee.name
 
 
 

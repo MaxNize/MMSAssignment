@@ -33,6 +33,7 @@ class Programm:
         self.UserManager.SearchManager = self.SearchManager
         self.SearchManager.MailManager = self.MailManager
         self.SearchManager.UserManager = self.UserManager
+        self.EmployeeManager.UserManager = self.UserManager
         
         self.setupUsers()
         self.setupMails()
