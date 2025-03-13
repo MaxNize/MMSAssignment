@@ -1,4 +1,3 @@
-from AccountingSystem import AccountingSystem
 from Contact import Contact
 from ContactManagementSystem import ContactManagementSystem
 import json
@@ -21,7 +20,6 @@ class Programm:
         self.ContactManager = ContactManagementSystem()
         self.SearchManager = SearchManagementSystem()
         self.EmployeeManager = EmployeeInformationSystem(db.getLastEmployeeID())
-        self.AccountingManager = AccountingSystem()
         
         self.UserManager.FolderManager = self.FolderManager
         self.FolderManager.MailManager = self.MailManager
@@ -41,7 +39,7 @@ class Programm:
         self.setupEmployees()
         self.setupHoursAndSales()
 
-        self.MenuManager = MenuSystem(self.AccountingManager, self.UserManager, self.EmployeeManager)
+        self.MenuManager = MenuSystem(self.UserManager, self.EmployeeManager)
 
     def mainloop(self):
         self.MenuManager.mainloop()
