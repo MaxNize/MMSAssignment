@@ -56,7 +56,6 @@ class System:
                         return out
                     except ValueError:
                         print("Input must be a float")
-
             case "decimalPercentage":
                 while (True):
                     try:
@@ -78,12 +77,7 @@ class System:
         print(text)
         print(self.TEXTdivider)
 
-    def checkSafetyQuestion(self, input):
-        if (input == "y" or input == "Y" or input == "yes" or input == "Yes"):
-            return True
-        return False
-
-    
+    @abstractmethod 
     def initing(self):
         pass
     
@@ -102,6 +96,7 @@ class System:
             return
         self.specificQuestionnaire(answer)
 
+    @abstractmethod
     def specificQuestionnaire(self, answer):
         match answer:
             case 1:
