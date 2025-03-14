@@ -1,4 +1,5 @@
 import re #allows the usage of RegEX 
+from abc import ABC, abstractmethod
 
 class System:
     def __init__(self):
@@ -66,6 +67,11 @@ class System:
                             print("Input must be a decimal between 0 and 1")
                     except ValueError:
                         print("Input must be a decimal")
+            case "safety":
+                out = input(text)
+                if (out == "y" or out == "Y" or out == "yes" or out == "Yes"):
+                    return True
+                return False
             
     def TEXTheading(self, text):
         print(self.TEXTdivider)

@@ -83,7 +83,7 @@ What do you want to do?
                 continue
             print(i)
         id = self.safeQuestion("Which employee do you want to delete? ", "int")
-        if self.checkSafetyQuestion(input("ARE YOU SURE? THIS WILL DELETE DATA PERMANANTLY (y/Y)")):
+        if self.safeQuestion("ARE YOU SURE? THIS WILL DELETE DATA PERMANANTLY! (y/Y): ", "safety"):
             for i in self.employees:
                 if i.id == id:
                     i.name = None

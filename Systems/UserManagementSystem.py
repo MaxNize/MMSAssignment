@@ -84,8 +84,7 @@ What do you want to do?
             attachmentsPath = input("Enter filepath to your attachement in the attachements folder (PATH or leave blank): ")
             time = datetime.datetime.now()
             time = time.strftime("%Y-%m-%d %H:%M:%S")
-            safety = input("Do you want to send the message? (y/n) ")
-            if(self.checkSafetyQuestion(safety)):
+            if(self.safeQuestion("Do you want to send the message? (y/n): ", "safety")):
                 self.active.sendMail(subject, to, self.active.mail, bcc, cc, content, attachmentsPath, time)
                 print("The Mail has been added to your Outbox!")
         else:
@@ -158,7 +157,7 @@ What do you want to do?
             print("ARE YOU SURE ABOUT THAT?")
             print("THIS WILL DELETE ALL YOUR DATA PERMANANTLY")
             answer = input("(y/n): ")
-            if (self.checkSafetyQuestion(answer)):
+            if (self.safeQuestion("(y/n): ", "answer")):
                 pw = input(self.TEXTenterYourPw)
                 user = self.getUser(userName)
                 if (user.checkPw(pw)):

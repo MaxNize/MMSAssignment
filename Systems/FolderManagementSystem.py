@@ -57,8 +57,7 @@ What do you want to do?
         print("You need at least one folder")
 
     def deleteFolderQ(self):
-        safety = input("Do you really want to delete the folder (All Mails in folder will also be deleted)? (y/n) ")
-        if (self.checkSafetyQuestion(safety)):
+        if (self.safeQuestion("Do you really want to delete the folder (All Mails in folder will also be deleted)? (y/n): ", "safety")):
             self.deleteFolder()
             print("Folder deleted")
             return
@@ -78,14 +77,6 @@ What do you want to do?
             self.running = False
             return
         print("You need at least one folder")
-
-    def deleteFolderQ(self):
-        safety = input("Do you really want to delete the folder (All Mails in folder will also be deleted)? (y/n) ")
-        if (self.checkSafetyQuestion(safety)):
-            self.deleteFolder()
-            print("Folder deleted")
-            return
-        print("Canceled")
 
     def updateBasedOnActivity(self):
         self.updateBaseQuestion()

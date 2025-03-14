@@ -19,8 +19,7 @@ What do you want to do?
         self.UserManager = False
 #Mainfunction 1 allows the user to delete a selected  mail 
     def deleteMailQ(self):
-        print("Do you really want to delete this Mail?")
-        if (self.checkSafetyQuestion(input("(y/n) "))):
+        if (self.safeQuestion("Do you really want to delete this Mail? (y/n): ", "safety")):
             self.deleteMail()
 
     def deleteMail(self):
@@ -59,8 +58,7 @@ What do you want to do?
         attachmentsPath = input("Enter filepath to your attachement in the attachements folder (PATH or leave blank): ")
         time = datetime.datetime.now()
         time = time.strftime("%Y-%m-%d %H:%M:%S")
-        safety = input("Do you want to send the message? (y/n) ")
-        if(self.checkSafetyQuestion(safety)):
+        if(self.safeQuestion("Do you want to send the message? (y/n): ", "safety")):
             self.answerMail(content, attachmentsPath, time)
             print("Mail sent!")
             return
@@ -71,7 +69,7 @@ What do you want to do?
             to = input("Enter Receiver: ")
             if (self.checkForMailpattern(to)):
                 msg = input("Enter your message: ")
-                if (self.checkSafetyQuestion(input("Do you want to send the message? (y/n) "))):
+                if (self.safeQuestion("Do you want to send the message? (y/n): ", "safety")):
                     self.forwardMail(to, msg)
                     return
                 return

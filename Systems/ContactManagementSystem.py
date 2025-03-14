@@ -49,7 +49,7 @@ What do you want to do?
     def deleteContactQ(self, name):
         self.TEXTheading("DELETING CONTACT")
 
-        if (self.checkSafetyQuestion(input("Are you sure you want to delete that contact? (y/n) "))):
+        if (self.safeQuestion("Are you sure you want to delete that contact? (y/n): ", "safety")):
             if self.deleteContact(name):
                 print(f"{name} was removed from your contacts")
                 return True
@@ -83,7 +83,7 @@ What do you want to do?
             if (not self.checkForMailpattern(newMail)):
                 print("Invalid mail entered! Please try again.")
                 continue
-            if (not self.checkSafetyQuestion(input("Are you sure you want to change this contact? (y/n) "))):
+            if (not self.safeQuestion("Are you sure you want to change this contact? (y/n): ", "safety")):
                 return False
             self.editContact(name, newName, newFirstName, newLastName, newPhoneNumber, newMail)
             print(f"{name} was changed to {newName}")
@@ -101,8 +101,7 @@ What do you want to do?
             attachmentsPath = input("Enter filepath to your attachement in the attachements folder (PATH or leave blank): ")
             time = datetime.now()
             time = time.strftime("%Y-%m-%d %H:%M:%S")
-            safety = input("Do you want to send the message? (y/n) ")
-            if(self.checkSafetyQuestion(safety)):
+            if(self.safeQuestion("Do you want to send the message? (y/n): ", "safety")):
                 self.active.sendMail(subject, to, self.active.mail, bcc, cc, content, attachmentsPath, time)
                 print("The Mail has been added to your Outbox!")
         else:
