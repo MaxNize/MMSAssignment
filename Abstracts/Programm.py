@@ -1,14 +1,13 @@
-from Contact import Contact
-from ContactManagementSystem import ContactManagementSystem
-import json
-from Employee import Employee
-from EmployeeInformationSystem import EmployeeInformationSystem
-from FolderManagementSystem import FolderManagementSystem
-from HoursAndSales import HoursAndSales
-from MailManagementSystem import MailManagementSystem
-from MenuSystem import MenuSystem
-from SearchManagementSystem import SearchManagementSystem
-from UserManagementSystem import UserManagementSystem
+from Models.Contact import Contact
+from Systems.ContactManagementSystem import ContactManagementSystem
+from Models.Employee import Employee
+from Systems.EmployeeInformationSystem import EmployeeInformationSystem
+from Systems.FolderManagementSystem import FolderManagementSystem
+from Models.HoursAndSales import HoursAndSales
+from Systems.MailManagementSystem import MailManagementSystem
+from Systems.MenuSystem import MenuSystem
+from Systems.SearchManagementSystem import SearchManagementSystem
+from Systems.UserManagementSystem import UserManagementSystem
 from db import db
 
 
@@ -85,12 +84,16 @@ class Programm:
     def setupMails(self):
         data = db.getMails()
         for i in data:
-            self.UserManager.getUser(i[9]).getFolder(i[8]).createMail(i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[10])
+            user = self.UserManager.getUser(i[9])
+            if user != None:
+                user.getFolder(i[8]).createMail(i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[10])
 
     def setupContacts(self):
         data = db.getContacts()
         for i in data:
-            self.UserManager.getUser(i[4]).contacts.append(Contact(i[0], i[1], i[2], i[3], i[4], i[5]))
+            user = self.UserManager.getUser(i[4])
+            if user != None:
+                user.contacts.append(Contact(i[0], i[1], i[2], i[3], i[4], i[5]))
 
     def setupEmployees(self):
         data = db.getEmployees()

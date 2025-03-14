@@ -1,6 +1,6 @@
-from Folder import Folder
-from System import System
-from User import User
+from Models.Folder import Folder
+from Abstracts.System import System
+from Models.User import User
 import datetime
 
 

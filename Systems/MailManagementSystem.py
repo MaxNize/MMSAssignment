@@ -1,5 +1,5 @@
 #This file is used to manage all the Mails that a User has revicved
-from System import System
+from Abstracts.System import System
 import datetime #provides classes for working with dates and times
 
 class MailManagementSystem(System):

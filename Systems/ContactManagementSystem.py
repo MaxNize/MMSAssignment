@@ -1,7 +1,7 @@
 #in this file everything concering contacts is handeled
 from datetime import datetime
-from System import System
-from Contact import Contact 
+from Abstracts.System import System
+from Models.Contact import Contact 
 
 class ContactManagementSystem(System):
     def __init__(self):

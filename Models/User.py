@@ -1,5 +1,5 @@
 #This file contains the User class its attributes and functions   
-import Folder #is needed to know which flders and mails the user has 
+import Models.Folder as Folder #is needed to know which flders and mails the user has 
 
 class User:
     def __init__(self, userName, firstName, lastName, mail, pw, default):

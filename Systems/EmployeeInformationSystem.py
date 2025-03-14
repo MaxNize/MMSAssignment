@@ -1,9 +1,9 @@
-from Employee import Employee
-from HoursAndSales import HoursAndSales
-from System import System
-import logging
+from Models.Employee import Employee
+from Models.HoursAndSales import HoursAndSales
+from Abstracts.System import System
+import Utils.logging as logging
 from datetime import datetime
-import FileHandling
+import Utils.FileHandling as FileHandling
 
 class EmployeeInformationSystem(System):
     def __init__(self, lastId):

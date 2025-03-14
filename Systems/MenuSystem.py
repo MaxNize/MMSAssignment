@@ -1,4 +1,4 @@
-from System import System
+from Abstracts.System import System
 
 
 class MenuSystem(System):

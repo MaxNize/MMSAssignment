@@ -1,5 +1,5 @@
 #This file is used to manage the various folders themselves 
-from System import System
+from Abstracts.System import System
 
 class FolderManagementSystem(System):
     def __init__(self):

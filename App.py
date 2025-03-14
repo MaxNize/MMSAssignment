@@ -1,5 +1,5 @@
 #starts the whole programm
-from Programm import Programm
+from Abstracts.Programm import Programm
 
 p = Programm()
 p.mainloop()

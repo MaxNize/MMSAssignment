@@ -1,5 +1,5 @@
 #This file contains the folder class and its attributes and its functions
-import Mail #Mail needs to be imported to Manipulate them in the folder
+import Models.Mail as Mail #Mail needs to be imported to Manipulate them in the folder
 class Folder:
     def __init__(self, name) -> None:
         self.name = name
