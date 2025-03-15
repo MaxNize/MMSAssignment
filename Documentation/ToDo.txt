@@ -84,20 +84,102 @@ Comments to the Backlog:
 
 
 BUGS:
--delete employee does not work??
 
+
+ToDo Dimi:
+
+#ToDo
+
+#inProgress
+
+#Testing
 
 ToDo Max:
 #ToDo
 
 #inProgress
--creating employee mgmt system
---create employee
 
 #Testing
 
-#Done
+
+
+
+
+Done
+
 -editing DB for ma info and payroll info and logging
 -adding testData
 
-ToDo Dimi:
+#-create employee %
++|-enter name %
++|-enter birthdate %
++|-enter role %
++|-enter mail %
+++|-validate %
++|-enter type (fulltime, parttime) %
++|-enter base_salary %
++|-enter comission_rate %
++|-set employee_ID automatically %
+#-edit employee %
++|-call employee %
++|-edit name %
++|-edit birthdate %
++|-edit role %
++|-edit mail %
+++|-validate %
++|-edit type (fulltime, parttime) %
++|-edit base_salary %
++|-edit comission_rate %
+#-read data %
++|-read data of all employees in a nice format (show employee ID, name, birthdate, role, mail, type, base_salary, comission_rate)
+#-delete data
++|-delete data of an employee %
+++|-ask if this task should really be performed %
++|-the id should not be given to a new employee again %
+
+
+-Payrole System
+#-init
++|-is called when ma is created
++|-enter hourly_rate
+#-Process: time mgmt
++|-enter time_worked for a date for an employee
+++|-check if date already exists
+++|-check if amount is valid
+#-Process: sales mgmt
++|-enter a sale for a date for an employee
+++|-check if date already exists
+++|-check if amount is valid
+#-Edit payroll info
++|-edit sales
+++|-check if date already exists
+++|-check if amount is valid
++|-edit time_worked
+++|-check if date already exists
+++|-check if amount is valid
+#-Print payroll info
++|-print time_worked for an employee per date
++|-print sales for an employee per date
+#-Process: Generate Payslip
++|-specify time range
++|-create file with:
+++|-employee info (ID, name, birthdate, role, mail, type, base_salary, comission_rate)
+++|-per date list:
++++|-time_worked
++++|-base_salary per hour
++++|-sales
++++|-comission_rate
++++|-calculate the salary for that day (time_worked * base_salary)
++++|-calculate the comission for that day (sales * comission_rate)
+++|-sum the salaries
+++|-sum the comissions
+++|-total up
+++|-"send as mail"
+
+-Logging
+#-write every action to db with timestamp and error if needed
+
+-Documentation
+#-Class Diagramm
+#-Comments
+#-description in word
